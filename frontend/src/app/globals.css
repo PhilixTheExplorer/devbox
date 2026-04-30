@@ -1,1 +1,107 @@
 @import "tailwindcss";
+
+@theme {
+  --font-jetbrains-mono:
+    "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+
+  /* Basic devbox colors - explicitly mapping current CSS variables to Tailwind colors */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
+  --color-border: var(--border);
+  --color-border2: var(--border2);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-muted2: var(--muted2);
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+  --color-green: var(--green);
+  --color-red: var(--red);
+  --color-blue: var(--blue);
+
+  --animate-blink: blink 1s step-end infinite;
+  --animate-fade-in: fadeIn 0.18s ease both;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0e0e0c;
+  --surface: #161614;
+  --surface2: #1e1e1c;
+  --border: #252522;
+  --border2: #323230;
+  --text: #e8e6df;
+  --muted: #60605a;
+  --muted2: #888882;
+  --accent: #52a878;
+  --accent-dim: rgba(82, 168, 120, 0.1);
+  --green: #52a878;
+  --red: #e05555;
+  --blue: #5b9cf6;
+}
+
+:root[data-theme="light"] {
+  --bg: #f4f0e6;
+  --surface: #fdfaf4;
+  --surface2: #ede9e0;
+  --border: #ddd8cc;
+  --border2: #c8c4b8;
+  --text: #1a1916;
+  --muted: #9a9690;
+  --muted2: #706c65;
+  --accent: #2a7a50;
+  --accent-dim: rgba(42, 122, 80, 0.08);
+  --green: #2a7a50;
+  --red: #c43030;
+  --blue: #3a6ec8;
+}
+
+@layer base {
+  body {
+    font-family:
+      var(--font-jetbrains-mono), "JetBrains Mono", "Fira Code", "Cascadia Code",
+      monospace;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border2);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+::selection {
+  background: var(--accent-dim);
+}
