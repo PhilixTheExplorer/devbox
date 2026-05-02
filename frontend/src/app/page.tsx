@@ -6,16 +6,16 @@ export default function HomePage() {
   const categories = TOOL_CATEGORIES;
 
   return (
-    <div className="py-9 px-10 overflow-auto h-full">
+    <div className="py-page-y px-page-x overflow-auto h-full">
       <header className="mb-12">
-        <div className="text-[10px] text-muted tracking-[2px] mb-2.5">
+        <div className="text-2xs text-muted tracking-widest mb-2.5">
           {"// welcome"}
         </div>
-        <h1 className="text-[38px] font-bold tracking-[-1px] leading-none m-0">
+        <h1 className="text-4xl font-bold leading-none m-0">
           <span className="text-accent">[</span>devbox
           <span className="text-accent">]</span>
         </h1>
-        <p className="text-muted2 mt-3 text-[13px] leading-[1.7] max-w-[480px] mb-0">
+        <p className="text-muted2 mt-3 text-ui leading-relaxed max-w-copy mb-0">
           no ads. no accounts. no tracking.
           <br />
           tools that run in your browser, built by people who were tired of bad
@@ -30,11 +30,11 @@ export default function HomePage() {
         if (!tools.length) return null;
         return (
           <section key={cat} className="mb-9">
-            <header className="text-[10px] text-accent tracking-[2px] uppercase mb-2.5 flex items-center gap-3">
+            <header className="text-2xs text-accent tracking-widest uppercase mb-2.5 flex items-center gap-3">
               {cat}
-              <div className="flex-1 h-[1px] bg-border" />
+              <div className="flex-1 h-px bg-border" />
             </header>
-            <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-0.5">
+            <div className="grid grid-tool-cards gap-0.5">
               {tools.map((tool) => (
                 <HomeCard key={tool.id} tool={tool} />
               ))}
@@ -55,21 +55,21 @@ function HomeCard({ tool }: HomeCardProps) {
 
   const content = (
     <>
-      <div className="text-[13px] text-text mb-[3px] flex items-center gap-2">
+      <div className="text-ui text-text mb-1 flex items-center gap-2">
         {tool.name}
         {isSoon && (
-          <span className="text-[9px] text-muted border border-border px-[5px] py-[1px] rounded-sm">
+          <span className="text-3xs text-muted border border-border px-1.5 py-0.5 rounded-sm">
             soon
           </span>
         )}
       </div>
-      <div className="text-[11px] text-muted">{tool.description}</div>
+      <div className="text-ui-xs text-muted">{tool.description}</div>
     </>
   );
 
   if (isSoon) {
     return (
-      <div className="text-left px-4 py-[13px] border rounded-sm font-inherit transition-all duration-150 bg-surface border-border cursor-default opacity-50">
+      <div className="text-left px-4 py-3.5 border rounded-sm font-inherit transition-all duration-150 bg-surface border-border cursor-default opacity-50">
         {content}
       </div>
     );
@@ -78,7 +78,7 @@ function HomeCard({ tool }: HomeCardProps) {
   return (
     <Link
       href={`/${tool.id}`}
-      className="text-left px-4 py-[13px] border rounded-sm font-inherit transition-all duration-150 bg-surface border-border cursor-pointer hover:bg-accent-dim hover:border-accent no-underline"
+      className="text-left px-4 py-3.5 border rounded-sm font-inherit transition-all duration-150 bg-surface border-border cursor-pointer hover:bg-accent-dim hover:border-accent no-underline"
     >
       {content}
     </Link>

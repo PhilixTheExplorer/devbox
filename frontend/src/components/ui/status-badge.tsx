@@ -8,7 +8,7 @@ interface StatusBadgeProps {
 export function StatusBadge({ ok, text }: StatusBadgeProps) {
   return (
     <div
-      className={`text-[11px] px-[10px] py-1 rounded-sm border ${
+      className={`text-ui-xs px-2.5 py-1 rounded-sm border ${
         ok
           ? "border-green text-green bg-green/5"
           : "border-red text-red bg-red/5"

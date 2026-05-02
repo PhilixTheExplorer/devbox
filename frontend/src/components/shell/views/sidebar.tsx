@@ -11,15 +11,15 @@ export function DevboxSidebar() {
 
   return (
     <aside
-      className={`relative w-[216px] shrink-0 flex flex-col border-r border-border bg-surface overflow-hidden max-lg:fixed max-lg:inset-y-0 max-lg:left-0 max-lg:w-[min(86vw,300px)] max-lg:z-[70] max-lg:shadow-[10px_0_38px_rgba(0,0,0,0.35)] max-lg:transition-transform max-lg:duration-200 max-lg:ease-in-out ${
-        mobileOpen ? "max-lg:translate-x-0" : "max-lg:-translate-x-[108%]"
+      className={`relative layer-mobile-sidebar w-sidebar shrink-0 flex flex-col border-r border-border bg-surface overflow-hidden max-lg:fixed max-lg:inset-y-0 max-lg:left-0 max-lg:w-mobile-sidebar max-lg:shadow-sidebar max-lg:transition-transform max-lg:duration-200 max-lg:ease-in-out ${
+        mobileOpen ? "max-lg:translate-x-0" : "max-lg:translate-x-drawer-hidden"
       }`}
     >
-      <header className="px-4 pt-[13px] pb-[11px] border-b border-border shrink-0 flex items-center justify-between">
+      <header className="h-topbar px-4 border-b border-border shrink-0 flex items-center justify-between">
         <Link
           href="/"
           onClick={actions.finishNavigation}
-          className="bg-none border-none cursor-pointer p-0 font-inherit text-[14px] font-bold text-text no-underline"
+          className="bg-transparent border-none cursor-pointer p-0 font-inherit text-sm font-bold text-text no-underline"
         >
           <span className="text-accent">[</span>devbox
           <span className="text-accent">]</span>
@@ -29,7 +29,7 @@ export function DevboxSidebar() {
           type="button"
           aria-label="close navigation"
           onClick={actions.closeMobile}
-          className="hidden max-lg:inline-flex bg-none border border-border rounded-sm text-muted text-[12px] leading-none px-2 py-[5px] cursor-pointer"
+          className="hidden max-lg:inline-flex bg-transparent border border-border rounded-sm text-muted text-xs leading-none px-2 py-1.5 cursor-pointer"
         >
           close
         </button>
@@ -41,7 +41,7 @@ export function DevboxSidebar() {
           value={search.value}
           onChange={(e) => search.setValue(e.target.value)}
           placeholder="⌘K  search tools"
-          className="w-full px-[9px] py-[5px] rounded-sm text-[12px] bg-bg text-text border border-border font-inherit placeholder:text-muted focus:border-accent focus:outline-none"
+          className="w-full px-2.5 py-1.5 rounded-sm text-xs bg-bg text-text border border-border font-inherit placeholder:text-muted focus:border-accent focus:outline-none"
         />
       </div>
 
@@ -57,12 +57,12 @@ export function DevboxSidebar() {
               />
             ))
           ) : (
-            <div className="px-4 py-2.5 text-muted text-[11px]">no matches</div>
+            <div className="px-4 py-2.5 text-muted text-ui-xs">no matches</div>
           )
         ) : (
           categories.map((category) => (
             <div key={category.id}>
-              <div className="px-4 pt-2 pb-[3px] text-[9px] text-muted tracking-[2px] uppercase">
+              <div className="px-4 pt-2 pb-1 text-3xs text-muted tracking-widest uppercase">
                 {category.label}
               </div>
               {category.tools.map((tool) => (
@@ -82,7 +82,7 @@ export function DevboxSidebar() {
         <Link
           href="/about"
           onClick={actions.finishNavigation}
-          className={`block w-full text-left px-4 py-[7px] border-none border-l-2 cursor-pointer font-inherit text-[12px] hover:bg-white/[0.03] transition-colors duration-100 no-underline ${
+          className={`block w-full text-left px-4 py-2 border-none border-l-2 cursor-pointer font-inherit text-xs hover:bg-hover-subtle transition-colors duration-100 no-underline ${
             activeAbout
               ? "bg-accent-dim text-accent border-accent hover:bg-accent-dim"
               : "bg-transparent text-muted border-transparent hover:text-text"
@@ -95,7 +95,7 @@ export function DevboxSidebar() {
           target="_blank"
           rel="noreferrer"
           onClick={actions.finishNavigation}
-          className="block w-full text-left px-4 py-[7px] border-none border-l-2 cursor-pointer font-inherit text-[12px] hover:bg-white/[0.03] transition-colors duration-100 no-underline bg-transparent text-muted border-transparent hover:text-text"
+          className="block w-full text-left px-4 py-2 border-none border-l-2 cursor-pointer font-inherit text-xs hover:bg-hover-subtle transition-colors duration-100 no-underline bg-transparent text-muted border-transparent hover:text-text"
         >
           github ↗
         </a>

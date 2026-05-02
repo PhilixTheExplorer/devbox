@@ -23,7 +23,7 @@ export function ToolTextarea({
 }: ToolTextareaProps) {
   return (
     <textarea
-      className={`w-full px-3 py-[10px] rounded-sm resize-y leading-[1.6] bg-bg text-text border border-border focus:border-accent focus:outline-none font-inherit ${className}`}
+      className={`w-full px-3 py-2.5 rounded-sm resize-y leading-relaxed bg-bg text-text border border-border focus:border-accent focus:outline-none font-inherit ${className}`}
       value={value}
       onChange={onChange}
       placeholder={placeholder}

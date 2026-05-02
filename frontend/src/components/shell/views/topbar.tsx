@@ -15,15 +15,17 @@ export function DevboxTopbar() {
   const menuLabel = mobileSidebarOpen ? "close navigation" : "open navigation";
   const themeLabel =
     theme === "dark" ? "switch to light theme" : "switch to dark theme";
+  const topbarActionClass =
+    "h-toolbar-button justify-center rounded-sm border border-border bg-surface text-ui text-muted2 transition-all duration-150 w-icon-button p-0 lg:px-2.5 lg:py-1 lg:text-2xs lg:w-auto lg:leading-none lg:gap-1 hover:border-accent hover:bg-accent-dim hover:text-accent";
 
   return (
-    <header className="flex items-center border-b border-border shrink-0 bg-surface h-10 gap-2 px-2.5 lg:gap-2.5 lg:px-4">
+    <header className="flex items-center border-b border-border shrink-0 bg-surface h-topbar gap-2 px-2.5 lg:gap-2.5 lg:px-4">
       <button
         type="button"
         aria-label={menuLabel}
         title={menuLabel}
         onClick={toggleMobileSidebar}
-        className={`bg-transparent border rounded-sm cursor-pointer font-[inherit] text-[13px] w-[30px] h-[24px] p-0 shrink-0 hidden max-lg:inline-flex items-center justify-center transition-colors duration-100 ${
+        className={`bg-transparent border rounded-sm cursor-pointer font-inherit text-ui w-icon-button h-toolbar-button p-0 shrink-0 hidden max-lg:inline-flex items-center justify-center transition-colors duration-100 ${
           mobileSidebarOpen
             ? "border-accent text-accent"
             : "border-border text-muted hover:border-accent hover:text-accent"
@@ -34,7 +36,7 @@ export function DevboxTopbar() {
 
       <Link
         href="/"
-        className="text-[11px] text-muted whitespace-nowrap overflow-hidden text-ellipsis flex-1 lg:flex-initial"
+        className="text-ui-xs text-muted whitespace-nowrap overflow-hidden text-ellipsis flex-1 lg:flex-initial"
       >
         <span className="text-accent">[</span>devbox
         <span className="text-accent">]</span>
@@ -47,11 +49,11 @@ export function DevboxTopbar() {
           aria-label="toggle tweaks panel"
           title="toggle tweaks panel"
           onClick={toggleTweaks}
-          className={`bg-transparent border rounded-sm cursor-pointer font-[inherit] inline-flex items-center justify-center transition-colors duration-100 ${
+          className={`inline-flex cursor-pointer items-center font-inherit ${
             tweaks
-              ? "border-accent text-accent"
-              : "border-border text-muted hover:border-accent hover:text-accent"
-          } text-[13px] p-0 w-[30px] h-[24px] lg:text-[10px] lg:px-[9px] lg:py-[3px] lg:w-auto lg:leading-none lg:gap-1`}
+              ? "h-toolbar-button justify-center rounded-sm border border-accent bg-accent-dim text-ui text-accent transition-all duration-150 w-icon-button p-0 lg:px-2.5 lg:py-1 lg:text-2xs lg:w-auto lg:leading-none lg:gap-1"
+              : topbarActionClass
+          }`}
         >
           <TuneIcon size={11} />
           <span className="hidden lg:inline">tweaks</span>
@@ -62,7 +64,7 @@ export function DevboxTopbar() {
             aria-label={themeLabel}
             title={themeLabel}
             onClick={toggleTheme}
-            className="bg-transparent border border-border rounded-sm cursor-pointer font-[inherit] text-muted inline-flex items-center justify-center transition-colors duration-100 hover:border-accent hover:text-accent text-[13px] p-0 w-[30px] h-[24px] lg:text-[10px] lg:px-[9px] lg:py-[3px] lg:w-auto lg:leading-none lg:gap-1"
+            className={`inline-flex cursor-pointer items-center font-inherit ${topbarActionClass}`}
           >
             <span>{theme === "dark" ? "☀" : "☾"}</span>
             <span className="hidden lg:inline">
@@ -70,7 +72,7 @@ export function DevboxTopbar() {
             </span>
           </button>
         ) : (
-          <div className="w-[30px] h-[24px] lg:w-[48px] border border-border rounded-sm bg-transparent" />
+          <div className="w-icon-button h-toolbar-button lg:w-12 border border-border rounded-sm bg-transparent" />
         )}
       </div>
     </header>

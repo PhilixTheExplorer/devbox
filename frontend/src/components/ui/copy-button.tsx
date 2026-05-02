@@ -6,9 +6,10 @@ import { Btn, type ButtonVariant } from "./button";
 interface CopyBtnProps {
   text: string | number;
   size?: "sm" | "md";
+  disabled?: boolean;
 }
 
-export function CopyBtn({ text, size = "sm" }: CopyBtnProps) {
+export function CopyBtn({ text, size = "sm", disabled = false }: CopyBtnProps) {
   const [status, setStatus] = useState<"idle" | "copied" | "error">("idle");
   const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -38,7 +39,7 @@ export function CopyBtn({ text, size = "sm" }: CopyBtnProps) {
   };
 
   let label = "copy";
-  let variant: ButtonVariant = "ghost";
+  let variant: ButtonVariant = "default";
 
   if (status === "copied") {
     label = "✓ copied";
@@ -51,7 +52,7 @@ export function CopyBtn({ text, size = "sm" }: CopyBtnProps) {
   }
 
   return (
-    <Btn size={size} variant={variant} onClick={copy}>
+    <Btn size={size} variant={variant} disabled={disabled} onClick={copy}>
       {label}
     </Btn>
   );

@@ -24,9 +24,7 @@ export function Btn({
   className = "",
 }: BtnProps) {
   const sizeClasses =
-    size === "sm"
-      ? "px-[9px] py-[3px] text-[11px]"
-      : "px-[13px] py-[6px] text-[12px]";
+    size === "sm" ? "px-2.5 py-1 text-ui-xs" : "px-3.5 py-1.5 text-xs";
 
   const variantClasses: Record<ButtonVariant, string> = {
     default:
@@ -51,7 +49,7 @@ export function Btn({
       className={`inline-flex items-center gap-1.5 border rounded-sm font-inherit leading-none whitespace-nowrap transition-all duration-100
         ${sizeClasses}
         ${dynamicVariantClasses}
-        ${disabled ? "opacity-38 cursor-default" : "cursor-pointer"}
+        ${disabled ? "opacity-40 cursor-default" : "cursor-pointer"}
         ${className}
       `}
       style={style}

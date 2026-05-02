@@ -4,7 +4,7 @@
   --font-jetbrains-mono:
     "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
 
-  /* Basic devbox colors - explicitly mapping current CSS variables to Tailwind colors */
+  /* Theme palette */
   --color-bg: var(--bg);
   --color-surface: var(--surface);
   --color-surface2: var(--surface2);
@@ -18,9 +18,81 @@
   --color-green: var(--green);
   --color-red: var(--red);
   --color-blue: var(--blue);
+  --color-overlay: rgb(0 0 0 / 45%);
+  --color-hover-subtle: rgb(255 255 255 / 3%);
 
+  /* Compact app typography */
+  --text-3xs: 0.5625rem;
+  --text-3xs--line-height: 0.75rem;
+  --text-2xs: 0.625rem;
+  --text-2xs--line-height: 0.875rem;
+  --text-ui-xs: 0.6875rem;
+  --text-ui-xs--line-height: 1rem;
+  --text-ui: 0.8125rem;
+  --text-ui--line-height: 1.25rem;
+
+  /* App layout geometry */
+  --spacing-sidebar: 13.5rem;
+  --spacing-icon-button: 1.875rem;
+  --spacing-toolbar-button: 1.5rem;
+  --spacing-status-bar: 1.875rem;
+  --spacing-status-bar-compact: 1.625rem;
+  --spacing-tool-editor: 10rem;
+  --spacing-tool-editor-lg: 20rem;
+  --spacing-mobile-sidebar: min(86vw, 18.75rem);
+  --spacing-topbar: 2.5rem;
+  --spacing-page-x: 2.5rem;
+  --spacing-page-y: 2.25rem;
+  --spacing-panel-offset-x: 2rem;
+  --spacing-panel-offset-y: 2.5rem;
+  --spacing-tweaks-panel: 14rem;
+  --spacing-color-swatch: 2rem;
+
+  /* Content widths */
+  --container-copy: 30rem;
+  --container-readable: 40rem;
+  --container-tool: 75rem;
+
+  /* Elevation and stacking */
+  --shadow-sidebar: 0.625rem 0 2.375rem rgb(0 0 0 / 35%);
+
+  --z-mobile-overlay: 60;
+  --z-mobile-sidebar: 70;
+  --z-popover: 50;
+  --z-content: 0;
+
+  /* Motion */
   --animate-blink: blink 1s step-end infinite;
   --animate-fade-in: fadeIn 0.18s ease both;
+}
+
+:root {
+  /* Component-specific tokens used by custom utilities below */
+  --tool-card-min: 15rem;
+  --drawer-hidden-offset: -108%;
+  --fade-enter-y: 0.25rem;
+  --scrollbar-size: 0.3125rem;
+  --scrollbar-radius: 0.125rem;
+}
+
+@utility grid-tool-cards {
+  grid-template-columns: repeat(auto-fill, minmax(var(--tool-card-min), 1fr));
+}
+
+@utility translate-x-drawer-hidden {
+  translate: var(--drawer-hidden-offset) 0;
+}
+
+@utility layer-content {
+  z-index: var(--z-content);
+}
+
+@utility layer-mobile-overlay {
+  z-index: var(--z-mobile-overlay);
+}
+
+@utility layer-mobile-sidebar {
+  z-index: var(--z-mobile-sidebar);
 }
 
 @keyframes blink {
@@ -36,7 +108,7 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(var(--fade-enter-y));
   }
   to {
     opacity: 1;
@@ -85,8 +157,8 @@
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
 }
 
 ::-webkit-scrollbar-track {
@@ -95,7 +167,7 @@
 
 ::-webkit-scrollbar-thumb {
   background: var(--border2);
-  border-radius: 2px;
+  border-radius: var(--scrollbar-radius);
 }
 
 ::-webkit-scrollbar-thumb:hover {

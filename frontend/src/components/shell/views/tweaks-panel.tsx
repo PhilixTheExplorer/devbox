@@ -15,16 +15,16 @@ export function TweaksPanel() {
   if (!mounted) return null;
 
   return (
-    <div className="animate-fade-in fixed bottom-[38px] right-3 bg-surface border border-border rounded-[3px] p-4 w-[220px] shadow-[0_12px_40px_rgba(0,0,0,0.4)] z-[1000]">
-      <div className="flex items-center gap-2 mb-[14px] justify-between">
-        <span className="text-[11px] font-semibold tracking-[1px] inline-flex items-center gap-1.5">
+    <div className="animate-fade-in fixed bottom-panel-offset-y right-panel-offset-x z-popover w-tweaks-panel rounded-sm border border-border bg-surface p-4 shadow-xl">
+      <div className="flex items-center gap-2 mb-3.5 justify-between">
+        <span className="text-ui-xs font-semibold tracking-widest inline-flex items-center gap-1.5">
           <TuneIcon />
           Tweaks
         </span>
         <button
           type="button"
           onClick={closeTweaks}
-          className="bg-none border-none cursor-pointer text-muted text-[18px] leading-none font-inherit"
+          className="bg-transparent border-none cursor-pointer text-muted text-lg leading-none font-inherit"
         >
           &times;
         </button>
@@ -66,7 +66,7 @@ export function TweaksPanel() {
                 title={p.name}
                 aria-label={`set ${p.name} accent`}
                 onClick={() => setAccentIdx(i)}
-                className={`w-7 h-7 rounded-sm cursor-pointer transition-colors duration-100 border-2 ${
+                className={`w-color-swatch h-color-swatch rounded-sm cursor-pointer transition-colors duration-100 border-2 ${
                   i === accentIdx ? "border-text" : "border-transparent"
                 }`}
                 style={{ background: theme === "dark" ? p.dark : p.light }}

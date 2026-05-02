@@ -1,3 +1,8 @@
+export const ACCENT_DIM_OPACITY = {
+  dark: 0.1,
+  light: 0.08,
+} as const;
+
 export const ACCENT_PRESETS = [
   { name: "sage", dark: "#52A878", light: "#2A7A50" },
   { name: "amber", dark: "#E8622A", light: "#CC4A18" },

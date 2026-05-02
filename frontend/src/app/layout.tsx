@@ -62,7 +62,7 @@ export default function RootLayout({
       className={`${jetbrainsMono.variable} h-full overflow-hidden`}
       suppressHydrationWarning
     >
-      <body className="h-full overflow-hidden bg-bg text-text text-[13px] leading-[1.5] antialiased">
+      <body className="h-full overflow-hidden bg-bg text-text text-ui leading-normal antialiased">
         <DevboxShellProvider>
           <DevboxShell>{children}</DevboxShell>
         </DevboxShellProvider>

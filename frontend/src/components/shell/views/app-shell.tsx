@@ -24,11 +24,11 @@ export function DevboxShell({ children }: DevboxShellProps) {
           type="button"
           aria-label="close navigation menu"
           onClick={closeMobileSidebar}
-          className="fixed inset-0 border-none bg-black/45 z-[60] cursor-pointer lg:hidden"
+          className="fixed inset-0 layer-mobile-overlay border-none bg-overlay cursor-pointer lg:hidden"
         />
       )}
 
-      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+      <div className="relative layer-content flex-1 flex flex-col overflow-hidden min-w-0">
         <DevboxTopbar />
 
         <main className="flex-1 overflow-auto">{children}</main>
