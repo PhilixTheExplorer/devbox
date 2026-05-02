@@ -3,7 +3,12 @@
  * Every developer tool in devbox is registered here.
  */
 
-export const TOOL_CATEGORIES = ["generate", "notebooks"] as const;
+export const TOOL_CATEGORIES = [
+  "format",
+  "convert",
+  "generate",
+  "inspect",
+] as const;
 
 export type ToolCategory = (typeof TOOL_CATEGORIES)[number];
 
@@ -18,6 +23,13 @@ export type ToolMeta = {
 
 export const TOOLS = [
   {
+    id: "json",
+    name: "json formatter",
+    category: "format",
+    description: "format, minify, validate, and sort json locally.",
+    tags: ["json", "format", "formatter", "minify", "validate", "sort"],
+  },
+  {
     id: "uuid",
     name: "uuid generator",
     category: "generate",
@@ -28,7 +40,7 @@ export const TOOLS = [
   {
     id: "ipynb",
     name: "ipynb → pdf",
-    category: "notebooks",
+    category: "convert",
     description: "jupyter notebook to pdf. needs nbconvert server-side.",
     tags: ["jupyter", "notebook", "ipynb", "pdf", "python"],
     soon: true,

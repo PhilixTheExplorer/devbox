@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { SupportLinks } from "@/components/support-link";
-import { KV } from "@/components/ui";
 import { OSS_LINKS } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -65,30 +64,33 @@ export default function AboutPage() {
             tech stack
           </h2>
           <div className="border border-border rounded-sm overflow-hidden">
-          <table className="w-full border-collapse">
-            <tbody>
-              {[
-                ["runtime", "browser. just the browser."],
-                ["framework", "next.js (app router) + react"],
-                ["styling", "tailwind css v4"],
-                ["test & lint", "vitest + biome"],
-                ["tool scaffold", "pnpm create:tool"],
-                ["fonts", "JetBrains Mono"],
-                ["tracking", "none"],
-                ["cookies", "none"],
-                ["license", "MIT"],
-              ].map(([k, v]) => (
-                <tr key={k} className="border-b border-border last:border-none">
-                  <td className="px-3 py-2 text-muted text-ui-xs align-middle w-32">
-                    {k}
-                  </td>
-                  <td className="px-3 py-2 text-xs break-all align-middle font-mono">
-                    {v}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            <table className="w-full border-collapse">
+              <tbody>
+                {[
+                  ["runtime", "browser. just the browser."],
+                  ["framework", "next.js (app router) + react"],
+                  ["styling", "tailwind css v4"],
+                  ["test & lint", "vitest + biome"],
+                  ["tool scaffold", "pnpm create:tool"],
+                  ["fonts", "JetBrains Mono"],
+                  ["tracking", "none"],
+                  ["cookies", "none"],
+                  ["license", "MIT"],
+                ].map(([k, v]) => (
+                  <tr
+                    key={k}
+                    className="border-b border-border last:border-none"
+                  >
+                    <td className="px-3 py-2 text-muted text-ui-xs align-middle w-32">
+                      {k}
+                    </td>
+                    <td className="px-3 py-2 text-xs break-all align-middle font-mono">
+                      {v}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </section>
       </div>
