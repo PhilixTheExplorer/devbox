@@ -10,6 +10,7 @@
     "lint:fix": "biome check --write",
     "lint:unsafe": "biome check --write --unsafe",
     "format": "biome format --write",
+    "create:tool": "node scripts/create-tool.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -26,7 +27,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
-    "jsdom": "^29.1.1",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.1.5"
