@@ -7,37 +7,30 @@ import {
   ToolSegmentedControl,
 } from "@/components/tool-kit/tool-controls";
 import { Btn } from "@/components/ui/button";
-import { formatJson, type JsonMode } from "@/lib/tools/json";
+import { transformUrl, type UrlMode } from "@/lib/tools/url";
 
-const sampleJson = `{
-  "name": "devbox",
-  "private": true,
-  "tools": ["json", "uuid"],
-  "settings": {
-    "theme": "system",
-    "offline": true
-  }
-}`;
+const sampleUrl =
+  "https://thedevbox.org/tools/regex?mode=encode&from=home#examples";
 
-export default function JsonFormatter() {
-  const [input, setInput] = useState(sampleJson);
-  const [mode, setMode] = useState<JsonMode>("format");
-  const [sortKeys, setSortKeys] = useState(false);
+export default function UrlFormatter() {
+  const [input, setInput] = useState(sampleUrl);
+  const [mode, setMode] = useState<UrlMode>("format");
+  const [sortParams, setSortParams] = useState(true);
 
   const result = useMemo(() => {
-    return formatJson(input, mode, sortKeys);
-  }, [input, mode, sortKeys]);
+    return transformUrl(input, mode, sortParams);
+  }, [input, mode, sortParams]);
 
-  const loadSample = () => setInput(sampleJson);
+  const loadSample = () => setInput(sampleUrl);
   const clear = () => setInput("");
 
   return (
     <TextToolLayout
-      title="json formatter"
+      title="url formatter"
       input={input}
       output={result.output}
       error={result.error}
-      placeholder='{"ok": true}'
+      placeholder="https://example.com/path?query=value"
       onInputChange={setInput}
       controls={
         <>
@@ -45,15 +38,17 @@ export default function JsonFormatter() {
             value={mode}
             options={[
               { value: "format", label: "format" },
-              { value: "minify", label: "minify" },
+              { value: "encode", label: "encode" },
+              { value: "decode", label: "decode" },
             ]}
             onChange={setMode}
           />
 
           <ToolCheckbox
-            checked={sortKeys}
-            label="sort keys"
-            onChange={setSortKeys}
+            checked={sortParams}
+            disabled={mode !== "format"}
+            label="sort params"
+            onChange={setSortParams}
           />
 
           <Btn size="sm" variant="ghost" onClick={loadSample}>
@@ -67,8 +62,12 @@ export default function JsonFormatter() {
       footer={
         <>
           <span>{mode}</span>
-          <span>{sortKeys ? "sorted keys" : "original key order"}</span>
-          <span>{result.error ? "invalid json" : "valid json"}</span>
+          <span>
+            {sortParams && mode === "format"
+              ? "sorted params"
+              : "params unchanged"}
+          </span>
+          <span>{result.error ? "invalid url" : "ready"}</span>
           <span>{result.output.length} output chars</span>
         </>
       }

@@ -74,13 +74,13 @@ export default function UuidGen() {
           </div>
 
           <UuidList uuids={output ? output.split("\n") : []} />
-
-          <footer className="flex flex-wrap gap-2 border-t border-border pt-3 text-ui-xs text-muted">
-            <span>{count} generated</span>
-            <span>via crypto</span>
-            <span>ready to copy</span>
-          </footer>
         </section>
+
+        <footer className="flex flex-wrap gap-2 border-t border-border pt-3 text-ui-xs text-muted">
+          <span>{count} generated</span>
+          <span>{uppercase ? "uppercase" : "lowercase"}</span>
+          <span>{hyphens ? "with hyphens" : "no hyphens"}</span>
+        </footer>
       </div>
     </div>
   );
