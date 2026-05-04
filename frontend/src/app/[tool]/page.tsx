@@ -31,14 +31,24 @@ export async function generateMetadata({
   }
 
   const isSoon = "soon" in toolMeta && toolMeta.soon;
-  const title = `${toolMeta.name} - private browser tool`;
-  const description = `${toolMeta.description} Free, ad-free, and private in your browser.`;
+  const title = `${toolMeta.seo.primaryKeyword} - private browser tool`;
+  const description = `${toolMeta.description} Use this ${toolMeta.seo.primaryKeyword} free in your browser with no upload, no account, and no tracking.`;
   const image = `/${tool}/opengraph-image`;
+  const keywords = Array.from(
+    new Set([
+      toolMeta.seo.primaryKeyword,
+      ...toolMeta.seo.secondaryKeywords,
+      ...toolMeta.seo.longTailKeywords,
+      toolMeta.name,
+      toolMeta.category,
+      ...toolMeta.tags,
+    ]),
+  );
 
   return {
     title,
     description,
-    keywords: [toolMeta.category, ...toolMeta.tags],
+    keywords,
     alternates: {
       canonical: `/${tool}`,
     },

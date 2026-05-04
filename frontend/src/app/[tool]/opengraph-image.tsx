@@ -22,7 +22,8 @@ export function generateStaticParams() {
 export default async function Image({ params }: ToolImageProps) {
   const { tool } = await params;
   const toolMeta = getToolById(tool);
-  const name = toolMeta?.name ?? "developer tool";
+  const name =
+    toolMeta?.seo.primaryKeyword ?? toolMeta?.name ?? "developer tool";
   const description =
     toolMeta?.description ??
     "Fast, private, ad-free developer tools that run in your browser.";
