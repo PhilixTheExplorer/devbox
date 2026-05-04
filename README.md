@@ -48,7 +48,7 @@ pnpm hook:install
 pnpm dev
 ```
 
-For detailed frontend setup, architecture, tool conventions, and contribution notes, read [frontend/README.md](./frontend/README.md).
+For detailed frontend setup, architecture, and tool conventions, read [frontend/README.md](./frontend/README.md). For contribution workflow, read [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Git Hooks
 
@@ -67,7 +67,7 @@ the frontend.
 From the frontend directory:
 
 ```bash
-pnpm create:tool base64 --category convert --title "Base64 Encode / Decode"
+pnpm create:tool base64 --category convert --name "Base64 Encode / Decode" --description "Encode and decode Base64 locally."
 ```
 
 The scaffold command creates the tool component, shared logic file, unit test, registry entry, and component mapping.
@@ -82,7 +82,7 @@ Contributions are welcome. The best tools for this project are:
 - small, focused, and easy to understand
 - built with shared UI patterns so the app feels coherent
 
-If you find a bug, have an idea, or want to add a tool, open an issue or pull request.
+If you find a bug, have an idea, or want to add a tool, open an issue or pull request. See [CONTRIBUTING.md](./CONTRIBUTING.md) for setup, checks, and PR expectations.
 
 ## License
 

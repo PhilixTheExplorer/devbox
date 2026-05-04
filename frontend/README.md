@@ -77,7 +77,7 @@ pnpm create:tool <tool-id>
 Example:
 
 ```sh
-pnpm create:tool base64 --category convert --name "base64" --description "encode and decode base64 locally."
+pnpm create:tool base64 --category convert --name "Base64 Encode / Decode" --description "Encode and decode Base64 locally."
 ```
 
 Categories:
