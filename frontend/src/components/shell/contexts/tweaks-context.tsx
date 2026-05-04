@@ -7,6 +7,10 @@ function useShellTweaksState() {
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent<{ type?: string }>) => {
+      if (event.origin !== window.location.origin) {
+        return;
+      }
+
       if (event.data?.type === "__activate_edit_mode") {
         setTweaks(true);
       }
@@ -16,14 +20,14 @@ function useShellTweaksState() {
     };
 
     window.addEventListener("message", handleMessage);
-    window.parent.postMessage({ type: "__edit_mode_available" }, "*");
+    postToSameOriginParent({ type: "__edit_mode_available" });
     return () => window.removeEventListener("message", handleMessage);
   }, []);
 
   const toggleTweaks = () => setTweaks((value) => !value);
   const closeTweaks = () => {
     setTweaks(false);
-    window.parent.postMessage({ type: "__edit_mode_dismissed" }, "*");
+    postToSameOriginParent({ type: "__edit_mode_dismissed" });
   };
 
   return {
@@ -31,6 +35,14 @@ function useShellTweaksState() {
     toggleTweaks,
     closeTweaks,
   };
+}
+
+function postToSameOriginParent(message: { type: string }) {
+  if (window.parent === window) {
+    return;
+  }
+
+  window.parent.postMessage(message, window.location.origin);
 }
 
 type ShellTweaksContextType = ReturnType<typeof useShellTweaksState>;
