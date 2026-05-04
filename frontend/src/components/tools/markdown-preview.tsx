@@ -81,7 +81,7 @@ type DevboxTool = {
 ---
 
 ## Image
-![Devbox Banner](https://dummyimage.com/640x120/2a7a50/f4f0e6&text=devbox+markdown+preview)`;
+![Devbox Favicon]("/favicon.ico")`;
 
 export default function MarkdownPreviewTool() {
   const [input, setInput] = useState(sampleInput);
@@ -133,21 +133,44 @@ export default function MarkdownPreviewTool() {
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  a: ({ children, href }) => (
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-accent underline"
-                    >
-                      {children}
-                    </a>
-                  ),
-                  code: ({ children }) => (
-                    <code className="rounded-sm border border-border bg-surface px-1 text-xs">
-                      {children}
-                    </code>
-                  ),
+                  a: ({ children, href }) => {
+                    const safeHref = getAllowedPreviewLink(href);
+
+                    if (!safeHref) {
+                      return (
+                        <span className="text-muted underline decoration-dotted">
+                          {children}
+                        </span>
+                      );
+                    }
+
+                    return (
+                      <a
+                        href={safeHref}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        className="text-accent underline"
+                      >
+                        {children}
+                      </a>
+                    );
+                  },
+                  code: ({ children, node }) => {
+                    const isBlock =
+                      node?.position?.start.line !== node?.position?.end.line;
+
+                    return (
+                      <code
+                        className={
+                          isBlock
+                            ? "block whitespace-pre text-xs leading-relaxed"
+                            : "rounded-sm border border-border bg-surface px-1 text-xs"
+                        }
+                      >
+                        {children}
+                      </code>
+                    );
+                  },
                   pre: ({ children }) => (
                     <pre className="mb-3 overflow-auto rounded-sm border border-border bg-surface px-3 py-2 text-xs">
                       {children}
@@ -183,14 +206,24 @@ export default function MarkdownPreviewTool() {
                     </blockquote>
                   ),
                   hr: () => <hr className="my-4 border-border" />,
-                  img: ({ alt, src }) => (
-                    // biome-ignore lint/performance/noImgElement: Markdown preview renders arbitrary user-authored image URLs.
-                    <img
-                      src={src}
-                      alt={alt ?? ""}
-                      className="mb-3 max-w-full rounded-sm border border-border"
-                    />
-                  ),
+                  img: ({ alt, src }) => {
+                    if (!isAllowedPreviewImage(src)) {
+                      return (
+                        <span className="mb-3 block rounded-sm border border-border bg-surface px-3 py-2 text-ui-xs text-muted">
+                          remote image blocked
+                        </span>
+                      );
+                    }
+
+                    return (
+                      // biome-ignore lint/performance/noImgElement: Markdown preview renders local/data/blob image URLs.
+                      <img
+                        src={src}
+                        alt={alt ?? ""}
+                        className="mb-3 max-w-full rounded-sm border border-border"
+                      />
+                    );
+                  },
                   input: ({ checked, type }) => (
                     <input
                       type={type}
@@ -240,6 +273,49 @@ export default function MarkdownPreviewTool() {
       </div>
     </div>
   );
+}
+
+function isAllowedPreviewImage(src: unknown) {
+  if (typeof src !== "string" || !src) {
+    return false;
+  }
+
+  if (src.startsWith("/") || src.startsWith("./") || src.startsWith("../")) {
+    return true;
+  }
+
+  if (src.startsWith("data:image/") || src.startsWith("blob:")) {
+    return true;
+  }
+
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  try {
+    return (
+      new URL(src, window.location.origin).origin === window.location.origin
+    );
+  } catch {
+    return false;
+  }
+}
+
+function getAllowedPreviewLink(href: unknown) {
+  if (typeof href !== "string" || !href) {
+    return null;
+  }
+
+  if (href.startsWith("/") || href.startsWith("./") || href.startsWith("../")) {
+    return href;
+  }
+
+  try {
+    const url = new URL(href);
+    return ["http:", "https:", "mailto:"].includes(url.protocol) ? href : null;
+  } catch {
+    return null;
+  }
 }
 
 function PaneHeader({
