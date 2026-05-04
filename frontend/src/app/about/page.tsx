@@ -1,13 +1,27 @@
 import type { Metadata } from "next";
 import { SupportLinks } from "@/components/support-link";
-import { OSS_LINKS } from "@/config/site";
+import { OSS_LINKS, SITE_NAME } from "@/config/site";
+
+const title = "About devbox";
+const description =
+  "Learn about devbox and why these developer utilities are ad-free, account-free, tracking-free, and privacy-first.";
 
 export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Learn about devbox and why these utilities are ad-free, account-free, and privacy-first.",
+  title,
+  description,
   alternates: {
     canonical: "/about",
+  },
+  openGraph: {
+    title: `${title} | ${SITE_NAME}`,
+    description,
+    url: "/about",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: `${title} | ${SITE_NAME}`,
+    description,
   },
 };
 

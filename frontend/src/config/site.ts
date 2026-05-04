@@ -1,5 +1,22 @@
 const SITE_URL_FALLBACK = "https://thedevbox.org";
 
+export const SITE_NAME = "devbox";
+export const SITE_TITLE = "devbox - tools that don't suck";
+export const SITE_DESCRIPTION =
+  "Fast, private, ad-free developer tools that run in your browser.";
+export const SITE_KEYWORDS = [
+  "developer tools",
+  "web tools",
+  "browser utilities",
+  "json formatter",
+  "base64 decoder",
+  "hash generator",
+  "jwt decoder",
+  "regex tester",
+  "timestamp converter",
+  "devbox",
+] as const;
+
 export function getSiteOrigin() {
   const raw = process.env.NEXT_PUBLIC_SITE_URL ?? SITE_URL_FALLBACK;
 

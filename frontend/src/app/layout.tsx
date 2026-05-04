@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
-import { getSiteOrigin } from "@/config/site";
+import {
+  getSiteOrigin,
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_TITLE,
+} from "@/config/site";
 import "./globals.css";
 import { DevboxShellProvider } from "@/components/shell/contexts/shell-provider";
 import { DevboxShell } from "@/components/shell/views/app-shell";
@@ -14,13 +20,16 @@ const siteOrigin = getSiteOrigin();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteOrigin),
-  applicationName: "devbox",
+  applicationName: SITE_NAME,
   title: {
-    default: "devbox - tools that don't suck",
-    template: "%s | devbox",
+    default: SITE_TITLE,
+    template: `%s | ${SITE_NAME}`,
   },
-  description: "No ads. No accounts. No tracking.",
-  keywords: ["developer tools", "web tools", "utilities"],
+  description: SITE_DESCRIPTION,
+  keywords: [...SITE_KEYWORDS],
+  creator: "PhilixTheExplorer",
+  publisher: SITE_NAME,
+  manifest: "/site.webmanifest",
   alternates: {
     canonical: "/",
   },
@@ -28,14 +37,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "/",
-    siteName: "devbox",
-    title: "devbox - tools that don't suck",
-    description: "No ads. No accounts. No tracking.",
+    siteName: SITE_NAME,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
   twitter: {
     card: "summary",
-    title: "devbox - tools that don't suck",
-    description: "No ads. No accounts. No tracking.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
   robots: {
     index: true,
@@ -56,6 +65,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: SITE_NAME,
+    url: siteOrigin,
+    description: SITE_DESCRIPTION,
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Any",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+  };
+
   return (
     <html
       lang="en"
@@ -63,6 +87,11 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="h-full overflow-hidden bg-bg text-text text-ui leading-normal antialiased">
+        <script
+          type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD metadata is static and generated server-side.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <DevboxShellProvider>
           <DevboxShell>{children}</DevboxShell>
         </DevboxShellProvider>

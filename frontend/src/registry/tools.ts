@@ -223,6 +223,11 @@ const TOOL_MAP = new Map<string, RegisteredToolMeta>(
   TOOLS.map((t) => [t.id, t]),
 );
 
+export const AVAILABLE_TOOLS = TOOLS.filter(
+  (tool): tool is Exclude<RegisteredToolMeta, { soon: true }> =>
+    !("soon" in tool && tool.soon),
+);
+
 /** Look up a tool by its id. Returns undefined if not found. */
 export function getToolById(toolId: string): RegisteredToolMeta | undefined {
   return TOOL_MAP.get(toolId);

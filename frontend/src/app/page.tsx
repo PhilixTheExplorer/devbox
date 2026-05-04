@@ -1,6 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { SupportLinks } from "@/components/support-link";
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/config/site";
 import { TOOL_CATEGORIES, TOOLS, type ToolMeta } from "@/registry/tools";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: SITE_TITLE,
+  },
+  description: SITE_DESCRIPTION,
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function HomePage() {
   const categories = TOOL_CATEGORIES;

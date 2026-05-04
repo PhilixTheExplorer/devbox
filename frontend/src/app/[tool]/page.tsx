@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ToolRouteView } from "@/components/shell";
+import { SITE_NAME } from "@/config/site";
 import { getToolById, TOOLS } from "@/registry/tools";
 
 type ToolPageProps = {
@@ -29,22 +30,31 @@ export async function generateMetadata({
     };
   }
 
+  const isSoon = "soon" in toolMeta && toolMeta.soon;
+  const title = `${toolMeta.name} - private browser tool`;
+  const description = `${toolMeta.description} Free, ad-free, and private in your browser.`;
+
   return {
-    title: toolMeta.name,
-    description: toolMeta.description,
+    title,
+    description,
+    keywords: [toolMeta.category, ...toolMeta.tags],
     alternates: {
       canonical: `/${tool}`,
     },
     openGraph: {
-      title: `${toolMeta.name} | devbox`,
-      description: toolMeta.description,
+      title: `${title} | ${SITE_NAME}`,
+      description,
       url: `/${tool}`,
       type: "website",
     },
     twitter: {
       card: "summary",
-      title: `${toolMeta.name} | devbox`,
-      description: toolMeta.description,
+      title: `${title} | ${SITE_NAME}`,
+      description,
+    },
+    robots: {
+      index: !isSoon,
+      follow: !isSoon,
     },
   };
 }
