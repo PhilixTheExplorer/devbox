@@ -388,6 +388,29 @@ export const TOOLS = [
     },
   },
   {
+    id: "qr-code",
+    name: "qr code generator",
+    category: "generate",
+    description: "generate qr codes online free.",
+    tags: ["qr", "qrcode", "svg", "url", "generate", "png", "jpeg"],
+    seo: {
+      primaryKeyword: "qr code generator",
+      secondaryKeywords: [
+        "qr generator",
+        "create qr code",
+        "qr code svg",
+        "url qr code generator",
+      ],
+      longTailKeywords: [
+        "free online qr code generator",
+        "qr generator online",
+        "generate qr code in browser",
+        "create qr code without uploading",
+        "local svg qr code generator",
+      ],
+    },
+  },
+  {
     id: "uuid",
     name: "uuid generator",
     category: "generate",

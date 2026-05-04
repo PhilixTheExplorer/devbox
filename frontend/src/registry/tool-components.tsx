@@ -46,6 +46,10 @@ const HashTool = dynamic(() => import("@/components/tools/hash"), {
   loading: ToolLoading,
 });
 
+const QrCodeTool = dynamic(() => import("@/components/tools/qr-code"), {
+  loading: ToolLoading,
+});
+
 const JwtTool = dynamic(() => import("@/components/tools/jwt"), {
   loading: ToolLoading,
 });
@@ -156,6 +160,7 @@ export const TOOL_COMPONENTS = {
   "env-file": EnvFileTool,
   "diff-viewer": DiffViewerTool,
   jwt: JwtTool,
+  "qr-code": QrCodeTool,
   hash: HashTool,
   regex: RegexTool,
   base64: Base64Tool,
