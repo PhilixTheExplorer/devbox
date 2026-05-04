@@ -36,7 +36,7 @@ const monthNames = [
   "Dec",
 ];
 
-function namedValue(value: string, field: string) {
+function namedValue(value: string, field: string): string {
   const numeric = Number(value);
 
   if (field === "day of week" && Number.isInteger(numeric)) {
@@ -50,7 +50,7 @@ function namedValue(value: string, field: string) {
   return value;
 }
 
-function explainPart(value: string | undefined, field: string) {
+function explainPart(value: string | undefined, field: string): string {
   if (!value) return "missing";
   if (value === "*") return `every ${field}`;
   if (value.startsWith("*/")) return `every ${value.slice(2)} ${field}s`;
@@ -69,7 +69,7 @@ function explainPart(value: string | undefined, field: string) {
   return namedValue(value, field);
 }
 
-function formatRun(value: string) {
+function formatRun(value: string): string {
   return new Intl.DateTimeFormat(undefined, {
     dateStyle: "medium",
     timeStyle: "short",
