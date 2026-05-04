@@ -15,6 +15,7 @@ The frontend setup for [devbox]
 
 ```sh
 pnpm install
+pnpm hook:install
 pnpm dev
 ```
 
@@ -27,9 +28,27 @@ pnpm start        # serve production build
 pnpm lint         # biome check
 pnpm lint:unsafe  # apply safe + unsafe autofixes
 pnpm format       # biome format
+pnpm typecheck    # TypeScript type check
+pnpm hook:install # install Lefthook git hooks
+pnpm hook:pre-commit # run the pre-commit hook manually
 pnpm test         # vitest
 pnpm test:watch   # vitest watch mode
 ```
+
+## Git Hooks
+
+The repo uses Lefthook with a root-level `lefthook.yml`. Install hooks after
+installing dependencies:
+
+```sh
+pnpm hook:install
+```
+
+The pre-commit hook runs:
+
+- `pnpm format`
+- `pnpm lint`
+- `pnpm typecheck`
 
 ## Tool Architecture
 

@@ -1,0 +1,13 @@
+pre-commit:
+  parallel: false
+  commands:
+    format:
+      root: frontend
+      run: pnpm format
+      stage_fixed: true
+    lint:
+      root: frontend
+      run: pnpm lint
+    typecheck:
+      root: frontend
+      run: pnpm typecheck

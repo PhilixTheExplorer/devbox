@@ -44,10 +44,23 @@ The active app lives in `frontend`.
 ```bash
 cd frontend
 pnpm install
+pnpm hook:install
 pnpm dev
 ```
 
 For detailed frontend setup, architecture, tool conventions, and contribution notes, read [frontend/README.md](./frontend/README.md).
+
+## Git Hooks
+
+This repo uses Lefthook for pre-commit checks. After installing frontend
+dependencies, install the hooks from `frontend`:
+
+```bash
+pnpm hook:install
+```
+
+Before each commit, Lefthook runs formatting, linting, and TypeScript checks for
+the frontend.
 
 ## Creating A Tool
 
