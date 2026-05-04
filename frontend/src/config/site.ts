@@ -1,4 +1,4 @@
-const SITE_URL_FALLBACK = "https://thedevbox.org";
+const SITE_URL_FALLBACK = "https://www.thedevbox.org";
 
 export const SITE_NAME = "devbox";
 export const SITE_TITLE = "devbox - tools that don't suck";
