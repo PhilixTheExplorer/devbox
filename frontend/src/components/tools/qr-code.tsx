@@ -1,5 +1,6 @@
 "use client";
 
+import NextImage from "next/image";
 import { type ChangeEvent, useMemo, useRef, useState } from "react";
 import {
   ToolCheckbox,
@@ -14,6 +15,8 @@ import {
 
 const sampleInput = "https://www.thedevbox.org";
 const allowedLogoTypes = new Set(["image/png", "image/jpeg", "image/webp"]);
+const maxLogoBytes = 1024 * 1024;
+const maxLogoPixels = 2048;
 
 export default function QrCodeTool() {
   const [input, setInput] = useState(sampleInput);
@@ -129,10 +132,34 @@ export default function QrCodeTool() {
       return;
     }
 
+    if (file.size > maxLogoBytes) {
+      setLogoDataUrl(null);
+      setLogoName("");
+      setLogoError("logo must be 1 MB or smaller");
+      event.target.value = "";
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = () => {
-      setLogoDataUrl(typeof reader.result === "string" ? reader.result : null);
-      setLogoName(file.name);
+      if (typeof reader.result !== "string") {
+        setLogoError("could not read logo");
+        return;
+      }
+
+      validateLogoDimensions(reader.result).then((valid) => {
+        if (!valid) {
+          setLogoDataUrl(null);
+          setLogoName("");
+          setLogoError(`logo must be ${maxLogoPixels}px or smaller`);
+          event.target.value = "";
+          return;
+        }
+
+        setLogoDataUrl(reader.result as string);
+        setLogoName(file.name);
+        event.target.value = "";
+      });
     };
     reader.onerror = () => setLogoError("could not read logo");
     reader.readAsDataURL(file);
@@ -331,9 +358,12 @@ export default function QrCodeTool() {
             <SectionLabel>preview</SectionLabel>
             <div className="grid min-h-0 flex-1 place-items-center overflow-auto rounded-sm border border-border bg-surface p-4">
               {result.ok ? (
-                <img
+                <NextImage
                   src={result.dataUrl}
                   alt=""
+                  width={result.moduleCount * scale}
+                  height={result.moduleCount * scale}
+                  unoptimized
                   className="block max-h-full max-w-full object-contain"
                 />
               ) : (
@@ -360,6 +390,20 @@ export default function QrCodeTool() {
       </div>
     </div>
   );
+}
+
+function validateLogoDimensions(dataUrl: string) {
+  return new Promise<boolean>((resolve) => {
+    const image = new Image();
+    image.onload = () => {
+      resolve(
+        image.naturalWidth <= maxLogoPixels &&
+          image.naturalHeight <= maxLogoPixels,
+      );
+    };
+    image.onerror = () => resolve(false);
+    image.src = dataUrl;
+  });
 }
 
 function ColorField({
