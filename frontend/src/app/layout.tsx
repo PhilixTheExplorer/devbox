@@ -65,21 +65,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    name: SITE_NAME,
-    url: siteOrigin,
-    description: SITE_DESCRIPTION,
-    applicationCategory: "DeveloperApplication",
-    operatingSystem: "Any",
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-    },
-  };
-
   return (
     <html
       lang="en"
@@ -87,11 +72,6 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="h-full overflow-hidden bg-bg text-text text-ui leading-normal antialiased">
-        <script
-          type="application/ld+json"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD metadata is static and generated server-side.
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
         <DevboxShellProvider>
           <DevboxShell>{children}</DevboxShell>
         </DevboxShellProvider>
