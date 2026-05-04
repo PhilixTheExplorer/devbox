@@ -10,6 +10,9 @@ import {
   type DocxMarkdownResult,
 } from "@/lib/tools/docx-markdown";
 
+const maxDocxBytes = 10 * 1024 * 1024;
+const maxDocxSizeLabel = "10 MB";
+
 export default function DocxMarkdownTool() {
   const [fileName, setFileName] = useState("");
   const [isConverting, setIsConverting] = useState(false);
@@ -22,6 +25,19 @@ export default function DocxMarkdownTool() {
 
   const loadFile = async (file: File | undefined) => {
     if (!file) return;
+
+    if (file.size > maxDocxBytes) {
+      setFileName("");
+      setIsConverting(false);
+      setResult({
+        markdown: "",
+        paragraphs: 0,
+        messages: [],
+        error: `DOCX must be ${maxDocxSizeLabel} or smaller.`,
+      });
+      return;
+    }
+
     setFileName(file.name);
     setIsConverting(true);
     setResult({
@@ -40,8 +56,19 @@ export default function DocxMarkdownTool() {
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
           [".docx"],
       },
+      maxSize: maxDocxBytes,
       maxFiles: 1,
       multiple: false,
+      onDropRejected: () => {
+        setFileName("");
+        setIsConverting(false);
+        setResult({
+          markdown: "",
+          paragraphs: 0,
+          messages: [],
+          error: `DOCX must be ${maxDocxSizeLabel} or smaller.`,
+        });
+      },
       onDrop: (acceptedFiles) => loadFile(acceptedFiles[0]),
     });
 

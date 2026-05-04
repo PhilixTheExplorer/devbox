@@ -7,6 +7,9 @@ import { CopyBtn } from "@/components/ui/copy-button";
 import { ToolTextarea } from "@/components/ui/textarea";
 import { convertDocxToHtml, type DocxHtmlResult } from "@/lib/tools/docx-html";
 
+const maxDocxBytes = 10 * 1024 * 1024;
+const maxDocxSizeLabel = "10 MB";
+
 export default function DocxHtmlTool() {
   const [html, setHtml] = useState("");
   const [fileName, setFileName] = useState("");
@@ -19,6 +22,18 @@ export default function DocxHtmlTool() {
 
   const loadDocx = async (file: File | undefined) => {
     if (!file) return;
+
+    if (file.size > maxDocxBytes) {
+      setFileName("");
+      setHtml("");
+      setResult({
+        html: "",
+        messages: [],
+        error: `DOCX must be ${maxDocxSizeLabel} or smaller.`,
+      });
+      return;
+    }
+
     setFileName(file.name);
     setIsWorking(true);
     const next = await convertDocxToHtml(await file.arrayBuffer());
@@ -33,8 +48,18 @@ export default function DocxHtmlTool() {
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
           [".docx"],
       },
+      maxSize: maxDocxBytes,
       maxFiles: 1,
       multiple: false,
+      onDropRejected: () => {
+        setFileName("");
+        setHtml("");
+        setResult({
+          html: "",
+          messages: [],
+          error: `DOCX must be ${maxDocxSizeLabel} or smaller.`,
+        });
+      },
       onDrop: (acceptedFiles) => loadDocx(acceptedFiles[0]),
     });
 
