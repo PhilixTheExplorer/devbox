@@ -1,12 +1,33 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import { useCallback, useEffect, useState } from "react";
 import { ACCENT_DIM_OPACITY, ACCENT_PRESETS } from "@/config/theme-presets";
 
 export type DevboxTheme = "light" | "dark";
 
 const ACCENT_STORAGE_KEY = "devbox:accent";
+const THEME_STORAGE_KEY = "devbox:theme";
+
+function isDevboxTheme(value: string | null): value is DevboxTheme {
+  return value === "light" || value === "dark";
+}
+
+function readStoredTheme() {
+  if (typeof window === "undefined") {
+    return "dark";
+  }
+
+  try {
+    const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
+    if (isDevboxTheme(stored)) {
+      return stored;
+    }
+  } catch {
+    return "dark";
+  }
+
+  return "dark";
+}
 
 function readStoredAccentIdx() {
   if (typeof window === "undefined") {
@@ -26,7 +47,7 @@ function readStoredAccentIdx() {
 }
 
 export function useShellTheme() {
-  const { resolvedTheme, setTheme } = useTheme();
+  const [theme, setTheme] = useState<DevboxTheme>(readStoredTheme);
   const [accentIdx, setAccentIdx] = useState(readStoredAccentIdx);
   const [mounted, setMounted] = useState(false);
 
@@ -34,16 +55,15 @@ export function useShellTheme() {
     setMounted(true);
   }, []);
 
-  const currentTheme = mounted ? (resolvedTheme as DevboxTheme) : "light";
-
   useEffect(() => {
     if (!mounted) return;
 
     const preset = ACCENT_PRESETS[accentIdx];
-    const color = currentTheme === "dark" ? preset.dark : preset.light;
+    const color = theme === "dark" ? preset.dark : preset.light;
+    document.documentElement.dataset.theme = theme;
     document.documentElement.style.setProperty("--accent", color);
 
-    const dimOpacity = ACCENT_DIM_OPACITY[currentTheme];
+    const dimOpacity = ACCENT_DIM_OPACITY[theme];
     const r = parseInt(color.slice(1, 3), 16);
     const g = parseInt(color.slice(3, 5), 16);
     const b = parseInt(color.slice(5, 7), 16);
@@ -53,18 +73,19 @@ export function useShellTheme() {
       `rgba(${r},${g},${b},${dimOpacity})`,
     );
     try {
+      window.localStorage.setItem(THEME_STORAGE_KEY, theme);
       window.localStorage.setItem(ACCENT_STORAGE_KEY, String(accentIdx));
     } catch {
       // Ignore storage failures; the live theme can still be applied.
     }
-  }, [accentIdx, currentTheme, mounted]);
+  }, [accentIdx, mounted, theme]);
 
   const toggleTheme = useCallback(() => {
-    setTheme(currentTheme === "dark" ? "light" : "dark");
-  }, [currentTheme, setTheme]);
+    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
+  }, []);
 
   return {
-    theme: currentTheme,
+    theme,
     setTheme,
     accentIdx,
     setAccentIdx,

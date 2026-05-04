@@ -68,6 +68,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-theme="dark"
       className={`${jetbrainsMono.variable} h-full overflow-hidden`}
       suppressHydrationWarning
     >
