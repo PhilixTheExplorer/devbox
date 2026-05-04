@@ -28,6 +28,8 @@ export default async function Image({ params }: ToolImageProps) {
     toolMeta?.description ??
     "Fast, private, ad-free developer tools that run in your browser.";
   const category = toolMeta?.category ?? "tool";
+  const siteLabel = `[${SITE_NAME}]`;
+  const fullDescription = `${description} Free, ad-free, and private in your browser.`;
 
   return new ImageResponse(
     <div
@@ -50,7 +52,7 @@ export default async function Image({ params }: ToolImageProps) {
           justifyContent: "space-between",
         }}
       >
-        <div style={{ color: "#52a878", fontSize: 32 }}>[{SITE_NAME}]</div>
+        <div style={{ color: "#52a878", fontSize: 32 }}>{siteLabel}</div>
         <div style={{ color: "#91a0ad", fontSize: 28 }}>{category}</div>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
@@ -73,7 +75,7 @@ export default async function Image({ params }: ToolImageProps) {
             maxWidth: 900,
           }}
         >
-          {description} Free, ad-free, and private in your browser.
+          {fullDescription}
         </div>
       </div>
       <div
