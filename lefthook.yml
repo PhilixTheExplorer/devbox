@@ -11,3 +11,13 @@ pre-commit:
     typecheck:
       root: frontend
       run: pnpm typecheck
+
+pre-push:
+  parallel: false
+  commands:
+    test:
+      root: frontend
+      run: pnpm test
+    build:
+      root: frontend
+      run: pnpm build
