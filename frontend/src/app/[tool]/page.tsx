@@ -33,6 +33,7 @@ export async function generateMetadata({
   const isSoon = "soon" in toolMeta && toolMeta.soon;
   const title = `${toolMeta.name} - private browser tool`;
   const description = `${toolMeta.description} Free, ad-free, and private in your browser.`;
+  const image = `/${tool}/opengraph-image`;
 
   return {
     title,
@@ -46,11 +47,20 @@ export async function generateMetadata({
       description,
       url: `/${tool}`,
       type: "website",
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: `${toolMeta.name} on ${SITE_NAME}`,
+        },
+      ],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: `${title} | ${SITE_NAME}`,
       description,
+      images: [image],
     },
     robots: {
       index: !isSoon,

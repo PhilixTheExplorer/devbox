@@ -4,10 +4,15 @@ export const SITE_NAME = "devbox";
 export const SITE_TITLE = "devbox - tools that don't suck";
 export const SITE_DESCRIPTION =
   "Fast, private, ad-free developer tools that run in your browser.";
+export const SITE_OG_IMAGE = "/opengraph-image";
+export const SITE_LOCALE = "en_US";
 export const SITE_KEYWORDS = [
   "developer tools",
   "web tools",
   "browser utilities",
+  "online developer tools",
+  "privacy first developer tools",
+  "local browser tools",
   "json formatter",
   "base64 decoder",
   "hash generator",
@@ -25,6 +30,53 @@ export function getSiteOrigin() {
   } catch {
     return new URL(SITE_URL_FALLBACK).origin;
   }
+}
+
+export function getSiteStructuredData() {
+  const siteOrigin = getSiteOrigin();
+
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: siteOrigin,
+      description: SITE_DESCRIPTION,
+      inLanguage: "en-US",
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      name: SITE_NAME,
+      url: siteOrigin,
+      description: SITE_DESCRIPTION,
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Any",
+      browserRequirements: "Requires JavaScript. Runs in modern browsers.",
+      isAccessibleForFree: true,
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+      featureList: [
+        "JSON formatter",
+        "Base64 encoder and decoder",
+        "JWT decoder",
+        "Hash generator",
+        "Regex tester",
+        "Timestamp converter",
+        "Markdown preview",
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: siteOrigin,
+      sameAs: [OSS_LINKS.repo],
+    },
+  ];
 }
 
 export const OSS_LINKS = {
