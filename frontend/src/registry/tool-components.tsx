@@ -27,6 +27,10 @@ const TimestampConverter = dynamic(
   },
 );
 
+const UserAgentTool = dynamic(() => import("@/components/tools/user-agent"), {
+  loading: ToolLoading,
+});
+
 const CaseConverterTool = dynamic(
   () => import("@/components/tools/case-converter"),
   {
@@ -54,7 +58,19 @@ const DiffViewerTool = dynamic(() => import("@/components/tools/diff-viewer"), {
   loading: ToolLoading,
 });
 
+const EnvFileTool = dynamic(() => import("@/components/tools/env-file"), {
+  loading: ToolLoading,
+});
+
+const CronParserTool = dynamic(() => import("@/components/tools/cron-parser"), {
+  loading: ToolLoading,
+});
+
 const JsonPathTool = dynamic(() => import("@/components/tools/json-path"), {
+  loading: ToolLoading,
+});
+
+const SqlTool = dynamic(() => import("@/components/tools/sql"), {
   loading: ToolLoading,
 });
 
@@ -73,9 +89,45 @@ const MimeTypeTool = dynamic(() => import("@/components/tools/mime-type"), {
   loading: ToolLoading,
 });
 
+const MarkdownPreviewTool = dynamic(
+  () => import("@/components/tools/markdown-preview"),
+  {
+    loading: ToolLoading,
+  },
+);
+
+const DocxMarkdownTool = dynamic(
+  () => import("@/components/tools/docx-markdown"),
+  {
+    loading: ToolLoading,
+  },
+);
+
+const JsonYamlTool = dynamic(() => import("@/components/tools/json-yaml"), {
+  loading: ToolLoading,
+});
+
+const HtmlMarkdownTool = dynamic(
+  () => import("@/components/tools/html-markdown"),
+  {
+    loading: ToolLoading,
+  },
+);
+
+const DocxHtmlTool = dynamic(() => import("@/components/tools/docx-html"), {
+  loading: ToolLoading,
+});
+
 const JsonCsvTool = dynamic(() => import("@/components/tools/json-csv"), {
   loading: ToolLoading,
 });
+
+const JsonTypescriptTool = dynamic(
+  () => import("@/components/tools/json-typescript"),
+  {
+    loading: ToolLoading,
+  },
+);
 
 const ColorConverterTool = dynamic(
   () => import("@/components/tools/color-converter"),
@@ -88,11 +140,20 @@ type ToolComponent = ComponentType;
 
 export const TOOL_COMPONENTS = {
   "color-converter": ColorConverterTool,
+  "json-typescript": JsonTypescriptTool,
   "json-csv": JsonCsvTool,
+  "json-yaml": JsonYamlTool,
+  "docx-html": DocxHtmlTool,
+  "html-markdown": HtmlMarkdownTool,
+  "docx-markdown": DocxMarkdownTool,
+  "markdown-preview": MarkdownPreviewTool,
   "mime-type": MimeTypeTool,
   "http-status": HttpStatusTool,
   "curl-converter": CurlConverterTool,
+  sql: SqlTool,
   "json-path": JsonPathTool,
+  "cron-parser": CronParserTool,
+  "env-file": EnvFileTool,
   "diff-viewer": DiffViewerTool,
   jwt: JwtTool,
   hash: HashTool,
@@ -102,5 +163,6 @@ export const TOOL_COMPONENTS = {
   json: JsonFormatter,
   timestamp: TimestampConverter,
   url: UrlFormatter,
+  "user-agent": UserAgentTool,
   uuid: UuidGen,
 } satisfies Record<AvailableToolId, ToolComponent>;

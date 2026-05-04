@@ -23,11 +23,25 @@ export type ToolMeta = {
 
 export const TOOLS = [
   {
+    id: "env-file",
+    name: "env file formatter",
+    category: "format",
+    description: "format, sort, and inspect env files locally.",
+    tags: ["env", "dotenv", "environment", "secret", "format"],
+  },
+  {
     id: "json",
     name: "json formatter",
     category: "format",
     description: "format, minify, validate, and sort json locally.",
     tags: ["json", "format", "formatter", "minify", "validate", "sort"],
+  },
+  {
+    id: "sql",
+    name: "sql formatter",
+    category: "format",
+    description: "format sql queries locally.",
+    tags: ["sql", "query", "database", "format", "formatter"],
   },
   {
     id: "url",
@@ -65,6 +79,27 @@ export const TOOLS = [
     tags: ["curl", "fetch", "http", "request", "convert"],
   },
   {
+    id: "docx-html",
+    name: "docx → html",
+    category: "convert",
+    description: "convert docx to html locally.",
+    tags: ["docx", "word", "html", "convert"],
+  },
+  {
+    id: "docx-markdown",
+    name: "docx → markdown",
+    category: "convert",
+    description: "convert docx text to markdown locally.",
+    tags: ["docx", "word", "markdown", "convert"],
+  },
+  {
+    id: "html-markdown",
+    name: "html ↔ markdown",
+    category: "convert",
+    description: "convert html and markdown locally.",
+    tags: ["html-markdown", "convert"],
+  },
+  {
     id: "ipynb",
     name: "ipynb → pdf",
     category: "convert",
@@ -78,6 +113,20 @@ export const TOOLS = [
     category: "convert",
     description: "convert json and csv locally.",
     tags: ["json", "csv", "spreadsheet", "table", "convert"],
+  },
+  {
+    id: "json-typescript",
+    name: "json → typescript",
+    category: "convert",
+    description: "infer typescript types from json locally.",
+    tags: ["json", "typescript", "interface", "type", "convert"],
+  },
+  {
+    id: "json-yaml",
+    name: "json ↔ yaml",
+    category: "convert",
+    description: "convert json and yaml locally.",
+    tags: ["json", "yaml", "convert", "config"],
   },
   {
     id: "timestamp",
@@ -100,6 +149,13 @@ export const TOOLS = [
     description:
       "universally unique. locally generated. cryptographically random.",
     tags: ["uuid", "guid", "id", "generate", "random"],
+  },
+  {
+    id: "cron-parser",
+    name: "cron parser",
+    category: "inspect",
+    description: "explain cron expressions and preview upcoming runs locally.",
+    tags: ["cron", "schedule", "job", "time", "inspect"],
   },
   {
     id: "diff-viewer",
@@ -130,6 +186,13 @@ export const TOOLS = [
     tags: ["jwt", "token", "decode", "inspect", "header", "payload"],
   },
   {
+    id: "markdown-preview",
+    name: "markdown preview",
+    category: "inspect",
+    description: "preview markdown locally.",
+    tags: ["markdown", "preview", "md", "inspect"],
+  },
+  {
     id: "mime-type",
     name: "mime type lookup",
     category: "inspect",
@@ -142,6 +205,13 @@ export const TOOLS = [
     category: "inspect",
     description: "test regular expressions against sample text locally.",
     tags: ["regex", "regexp", "pattern", "match", "inspect"],
+  },
+  {
+    id: "user-agent",
+    name: "user agent",
+    category: "inspect",
+    description: "inspect browser, os, device, and engine hints locally.",
+    tags: ["user-agent", "ua", "browser", "os", "device", "inspect"],
   },
 ] as const satisfies readonly ToolMeta[];
 
