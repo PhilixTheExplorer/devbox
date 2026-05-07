@@ -52,21 +52,25 @@ The pre-commit hook runs:
 
 ## Tool Architecture
 
-Tool code is split into three places:
+Each tool lives in its own folder under `src/tools/<tool-id>/`:
 
-- `src/components/tools/<tool-id>.tsx`: the tool UI.
-- `src/lib/tools/<tool-id>.ts`: pure logic for the tool.
-- `src/lib/tools/<tool-id>.test.ts`: unit tests for the pure logic.
+- `meta.ts`        tool metadata, server-safe (uses `defineTool`).
+- `ui.tsx`         the tool UI, default-exported client component.
+- `logic.ts`       pure logic for the tool.
+- `logic.test.ts`  unit tests for the pure logic.
 
 Shared tool UI lives in:
 
 - `src/components/tool-kit/text-tool-layout.tsx`
 - `src/components/tool-kit/tool-controls.tsx`
 
-Tool metadata and routing live in:
+Aggregation lives in:
 
-- `src/registry/tools.ts`
-- `src/registry/tool-components.tsx`
+- `src/tools/index.ts`        imports each `meta.ts`, exports `TOOLS`,
+                              `AVAILABLE_TOOLS`, `getToolById`, types.
+- `src/tools/components.tsx`  lazy-loads each `ui.tsx` via `next/dynamic`,
+                              exports `TOOL_COMPONENTS`.
+- `src/tools/_define.ts`      `defineTool()` helper and shared types.
 
 ## Create a Tool
 
@@ -87,14 +91,9 @@ Categories:
 - `generate`
 - `inspect`
 
-The scaffold creates:
-
-- `src/components/tools/<tool-id>.tsx`
-- `src/lib/tools/<tool-id>.ts`
-- `src/lib/tools/<tool-id>.test.ts`
-
-It also registers the tool in `src/registry/tools.ts` and
-`src/registry/tool-components.tsx`.
+The scaffold creates the four files under `src/tools/<tool-id>/` and
+registers the tool in `src/tools/index.ts` and `src/tools/components.tsx`.
+Run `pnpm lint:fix` afterwards to apply Biome's import-sort and formatting.
 
 ## Tool Guidelines
 

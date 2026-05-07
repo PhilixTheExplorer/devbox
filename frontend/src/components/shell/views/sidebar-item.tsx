@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { ToolMeta } from "@/registry/tools";
+import type { ToolMeta } from "@/tools";
 
 type SidebarItemProps = {
   tool: ToolMeta;

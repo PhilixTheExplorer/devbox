@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 import { SITE_NAME } from "@/config/site";
-import { getToolById, TOOLS } from "@/registry/tools";
+import { getToolById, TOOLS } from "@/tools";
 
 export const alt = `${SITE_NAME} developer tool`;
 export const size = {

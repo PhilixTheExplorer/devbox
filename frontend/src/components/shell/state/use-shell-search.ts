@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { TOOLS } from "@/registry/tools";
+import { TOOLS } from "@/tools";
 
 type UseShellSearchOptions = {
   openMobileSidebar: () => void;

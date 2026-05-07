@@ -1,7 +1,7 @@
 "use client";
 
-import { TOOL_COMPONENTS } from "@/registry/tool-components";
-import type { AvailableToolId, RegisteredToolMeta } from "@/registry/tools";
+import type { AvailableToolId, RegisteredToolMeta } from "@/tools";
+import { TOOL_COMPONENTS } from "@/tools/components";
 
 type ToolRouteViewProps = {
   tool: RegisteredToolMeta;

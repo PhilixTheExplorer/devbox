@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getSiteOrigin } from "@/config/site";
-import { AVAILABLE_TOOLS } from "@/registry/tools";
+import { AVAILABLE_TOOLS } from "@/tools";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteOrigin = getSiteOrigin();

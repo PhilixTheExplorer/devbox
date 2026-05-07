@@ -2,7 +2,7 @@
 
 import { useSelectedLayoutSegment } from "next/navigation";
 import { useShellSidebar } from "@/components/shell/contexts/sidebar-context";
-import { TOOL_CATEGORIES, TOOLS } from "@/registry/tools";
+import { TOOL_CATEGORIES, TOOLS } from "@/tools";
 
 const SIDEBAR_CATEGORIES = TOOL_CATEGORIES.map((category) => ({
   id: category,

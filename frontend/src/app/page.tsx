@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SupportLinks } from "@/components/support-link";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/config/site";
-import { TOOL_CATEGORIES, TOOLS, type ToolMeta } from "@/registry/tools";
+import { TOOL_CATEGORIES, TOOLS, type ToolMeta } from "@/tools";
 
 export const metadata: Metadata = {
   title: {

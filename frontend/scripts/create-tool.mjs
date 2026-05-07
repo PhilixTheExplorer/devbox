@@ -35,6 +35,11 @@ function toPascal(value) {
     .join("");
 }
 
+function toCamel(value) {
+  const pascal = toPascal(value);
+  return `${pascal[0]?.toLowerCase() ?? ""}${pascal.slice(1)}`;
+}
+
 function tsString(value) {
   return JSON.stringify(value);
 }
@@ -78,18 +83,41 @@ const name = readFlag("name", toTitle(id));
 const description = readFlag("description", `${toTitle(id)} tool.`);
 const nameLiteral = tsString(name);
 const pascal = toPascal(id);
+const camel = toCamel(id);
 const componentName = `${pascal}Tool`;
+const idKey = id.includes("-") ? `"${id}"` : id;
 
-const componentPath = join(src, "components", "tools", `${id}.tsx`);
-const logicPath = join(src, "lib", "tools", `${id}.ts`);
-const testPath = join(src, "lib", "tools", `${id}.test.ts`);
-const registryPath = join(src, "registry", "tools.ts");
-const componentRegistryPath = join(src, "registry", "tool-components.tsx");
+const toolFolder = join(src, "tools", id);
+const metaPath = join(toolFolder, "meta.ts");
+const logicPath = join(toolFolder, "logic.ts");
+const testPath = join(toolFolder, "logic.test.ts");
+const uiPath = join(toolFolder, "ui.tsx");
+const registryPath = join(src, "tools", "index.ts");
+const componentsPath = join(src, "tools", "components.tsx");
 
 const registry = readFileSync(registryPath, "utf8");
-if (registry.includes(`id: "${id}"`)) {
+if (registry.includes(`from "./${id}/meta"`)) {
   fail(`${id} is already registered`);
 }
+
+writeNewFile(
+  metaPath,
+  `import { defineTool } from "../_define";
+
+export default defineTool({
+  id: ${tsString(id)},
+  name: ${tsString(name)},
+  category: ${tsString(category)},
+  description: ${tsString(description)},
+  tags: [${tsString(id)}, ${tsString(category)}],
+  seo: {
+    primaryKeyword: ${tsString(name)},
+    secondaryKeywords: [],
+    longTailKeywords: [],
+  },
+});
+`,
+);
 
 writeNewFile(
   logicPath,
@@ -102,7 +130,7 @@ writeNewFile(
 writeNewFile(
   testPath,
   `import { describe, expect, it } from "vitest";
-import { transform${pascal} } from "./${id}";
+import { transform${pascal} } from "./logic";
 
 describe("${id} tool", () => {
   it("transforms input", () => {
@@ -113,13 +141,13 @@ describe("${id} tool", () => {
 );
 
 writeNewFile(
-  componentPath,
+  uiPath,
   `"use client";
 
 import { useMemo, useState } from "react";
 import { TextToolLayout } from "@/components/tool-kit/text-tool-layout";
 import { Btn } from "@/components/ui/button";
-import { transform${pascal} } from "@/lib/tools/${id}";
+import { transform${pascal} } from "./logic";
 
 const sampleInput = "hello";
 
@@ -144,54 +172,56 @@ export default function ${componentName}() {
           </Btn>
         </>
       }
-      footer={
-        <>
-          <span>ready</span>
-        </>
-      }
+      footer={<span>ready</span>}
     />
   );
 }
 `,
 );
 
-replaceInFile(registryPath, (current) =>
-  current.replace(
-    "export const TOOLS = [\n",
-    `export const TOOLS = [
-  {
-    id: ${tsString(id)},
-    name: ${tsString(name)},
-    category: ${tsString(category)},
-    description: ${tsString(description)},
-    tags: [${tsString(id)}, ${tsString(category)}],
-  },
-`,
-  ),
-);
+// Insert the meta import + array entry into src/tools/index.ts.
+// Anchor on the last `from "./<id>/meta"` line so we survive Biome's
+// import-sort without needing to know where the new import slots in.
+replaceInFile(registryPath, (current) => {
+  const metaImportRe = /^import \w+ from "\.\/[\w-]+\/meta";$/gm;
+  let lastEnd = -1;
+  for (const match of current.matchAll(metaImportRe)) {
+    lastEnd = match.index + match[0].length;
+  }
+  if (lastEnd === -1) {
+    fail("could not find any meta imports in src/tools/index.ts");
+  }
 
-replaceInFile(componentRegistryPath, (current) => {
+  const withImport = `${current.slice(0, lastEnd)}\nimport ${camel} from "./${id}/meta";${current.slice(lastEnd)}`;
+
+  return withImport.replace(
+    "export const TOOLS = [\n",
+    `export const TOOLS = [\n  ${camel},\n`,
+  );
+});
+
+// Insert the dynamic import + map entry into src/tools/components.tsx.
+replaceInFile(componentsPath, (current) => {
   const withImport = current.replace(
-    "\ntype ToolComponent = ComponentType;",
-    `
-const ${componentName} = dynamic(() => import("@/components/tools/${id}"), {
+    "\nexport const TOOL_COMPONENTS = {\n",
+    `\nconst ${componentName} = dynamic(() => import("./${id}/ui"), {
   loading: ToolLoading,
 });
 
-type ToolComponent = ComponentType;`,
+export const TOOL_COMPONENTS = {
+`,
   );
 
   return withImport.replace(
     "export const TOOL_COMPONENTS = {\n",
-    `export const TOOL_COMPONENTS = {
-  ${id.includes("-") ? `"${id}"` : id}: ${componentName},
-`,
+    `export const TOOL_COMPONENTS = {\n  ${idKey}: ${componentName},\n`,
   );
 });
 
 console.log(`created tool "${id}"`);
-console.log(`- src/components/tools/${id}.tsx`);
-console.log(`- src/lib/tools/${id}.ts`);
-console.log(`- src/lib/tools/${id}.test.ts`);
-console.log("- updated registry/tools.ts");
-console.log("- updated registry/tool-components.tsx");
+console.log(`- src/tools/${id}/meta.ts`);
+console.log(`- src/tools/${id}/ui.tsx`);
+console.log(`- src/tools/${id}/logic.ts`);
+console.log(`- src/tools/${id}/logic.test.ts`);
+console.log("- updated src/tools/index.ts");
+console.log("- updated src/tools/components.tsx");

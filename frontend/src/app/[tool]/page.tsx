@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ToolRouteView } from "@/components/shell";
 import { SITE_NAME } from "@/config/site";
-import { getToolById, TOOLS } from "@/registry/tools";
+import { getToolById, TOOLS } from "@/tools";
 
 type ToolPageProps = {
   params: Promise<{ tool: string }>;

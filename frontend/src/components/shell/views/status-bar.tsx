@@ -2,7 +2,7 @@
 
 import { StarIcon } from "@/components/icons";
 import { OSS_LINKS } from "@/config/site";
-import { TOOLS } from "@/registry/tools";
+import { TOOLS } from "@/tools";
 
 const AVAILABLE_TOOL_COUNT = TOOLS.filter(
   (tool) => !("soon" in tool && tool.soon),
