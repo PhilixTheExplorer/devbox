@@ -2,7 +2,7 @@ import { defineTool } from "../_define";
 
 export default defineTool({
   id: "base64",
-  name: "base64",
+  name: "base64 encode/decode",
   category: "convert",
   description: "encode and decode base64 locally.",
   tags: ["base64", "encode", "decode", "convert"],

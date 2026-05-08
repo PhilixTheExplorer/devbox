@@ -5,20 +5,18 @@ import { ToolSegmentedControl } from "@/components/tool-kit/tool-controls";
 import { Btn, CopyBtn, ToolTextarea } from "@/components/ui";
 import { type Base64Mode, transformBase64 } from "./logic";
 
-const sampleInput = "devbox keeps clipboard-shaped secrets local";
+const encodeSample = "devbox keeps clipboard-shaped secrets local";
+const decodeSample =
+  "ZGV2Ym94IGtlZXBzIGNsaXBib2FyZC1zaGFwZWQgc2VjcmV0cyBsb2NhbA==";
 
 export default function Base64Tool() {
-  const [input, setInput] = useState(sampleInput);
   const [mode, setMode] = useState<Base64Mode>("encode");
+  const [input, setInput] = useState(encodeSample);
   const result = useMemo(() => transformBase64(input, mode), [input, mode]);
 
-  const useOutputAsInput = () => {
-    if (!result.output) {
-      return;
-    }
-
-    setInput(result.output);
-    setMode(mode === "encode" ? "decode" : "encode");
+  const changeMode = (nextMode: Base64Mode) => {
+    setMode(nextMode);
+    setInput(nextMode === "encode" ? encodeSample : decodeSample);
   };
 
   return (
@@ -26,7 +24,7 @@ export default function Base64Tool() {
       <div className="mx-auto flex max-w-tool flex-col gap-4">
         <header className="flex flex-col gap-3 border-b border-border pb-4 md:flex-row md:items-end md:justify-between">
           <h1 className="m-0 text-2xl font-normal leading-tight text-text">
-            base64
+            base64 encode/decode
           </h1>
 
           <div className="flex flex-wrap items-center gap-2">
@@ -36,12 +34,14 @@ export default function Base64Tool() {
                 { value: "encode", label: "encode" },
                 { value: "decode", label: "decode" },
               ]}
-              onChange={setMode}
+              onChange={changeMode}
             />
             <Btn
               size="sm"
               variant="ghost"
-              onClick={() => setInput(sampleInput)}
+              onClick={() =>
+                setInput(mode === "encode" ? encodeSample : decodeSample)
+              }
             >
               sample
             </Btn>
@@ -56,7 +56,7 @@ export default function Base64Tool() {
           </div>
         </header>
 
-        <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-start">
+        <section className="grid gap-4 lg:grid-cols-2 lg:items-start">
           <div className="min-w-0">
             <PaneHeader label={mode === "encode" ? "plain text" : "base64"} />
             <ToolTextarea
@@ -68,17 +68,6 @@ export default function Base64Tool() {
               rows={16}
               className="h-64 min-h-64 resize-y text-xs lg:h-[30rem]"
             />
-          </div>
-
-          <div className="flex items-center justify-start lg:min-h-[32rem] lg:justify-center">
-            <Btn
-              size="sm"
-              variant="default"
-              onClick={useOutputAsInput}
-              disabled={!result.output}
-            >
-              swap
-            </Btn>
           </div>
 
           <div className="min-w-0">
