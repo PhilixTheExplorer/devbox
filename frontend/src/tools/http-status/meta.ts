@@ -20,4 +20,14 @@ export default defineTool({
       "developer http status code reference",
     ],
   },
+  content: {
+    overview: "Look up HTTP status codes and their meanings.",
+    explanation:
+      "The HTTP status code reference helps identify response classes, common meanings, and debugging hints while working with APIs, logs, network traces, or docs.",
+    highlights: [
+      "Search common HTTP response codes",
+      "Filter by status class",
+      "Use as a quick developer reference",
+    ],
+  },
 });

@@ -20,4 +20,15 @@ export default defineTool({
       "sort json keys online",
     ],
   },
+  content: {
+    overview:
+      "Format, minify, validate, and sort JSON without sending data away.",
+    explanation:
+      "The JSON formatter turns dense payloads into readable structure, reports parse errors, and can produce compact JSON for APIs, config files, logs, and clipboard workflows.",
+    highlights: [
+      "Beautify or minify JSON payloads",
+      "Optionally sort object keys for stable diffs",
+      "Validate syntax directly in the browser",
+    ],
+  },
 });

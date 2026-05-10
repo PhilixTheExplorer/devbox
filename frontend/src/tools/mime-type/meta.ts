@@ -20,4 +20,14 @@ export default defineTool({
       "file extension mime type lookup online",
     ],
   },
+  content: {
+    overview: "Look up MIME types, content types, and file extensions.",
+    explanation:
+      "The MIME type lookup helps map file extensions to media types and content-type headers for uploads, APIs, static assets, and browser responses.",
+    highlights: [
+      "Search by extension or MIME type",
+      "Find content-type header values",
+      "Use as a compact file type reference",
+    ],
+  },
 });

@@ -20,4 +20,14 @@ export default defineTool({
       "message digest generator online",
     ],
   },
+  content: {
+    overview: "Generate message digests and checksums from text.",
+    explanation:
+      "The hash generator creates digest values for copied text, helping compare content, document checksums, or produce quick SHA-style values in local workflows.",
+    highlights: [
+      "Generate common text hash values",
+      "Compare deterministic message digests",
+      "Keep source text client-side",
+    ],
+  },
 });

@@ -22,4 +22,14 @@ export default defineTool({
       "local svg qr code generator",
     ],
   },
+  content: {
+    overview: "Create QR codes for URLs, text, and short payloads.",
+    explanation:
+      "The QR code generator turns pasted content into scannable codes that can be exported for links, labels, presentations, and quick device handoff.",
+    highlights: [
+      "Generate QR codes in the browser",
+      "Export QR output as common image formats",
+      "Create codes without tracking or accounts",
+    ],
+  },
 });

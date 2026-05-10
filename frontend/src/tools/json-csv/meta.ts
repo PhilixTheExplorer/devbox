@@ -20,4 +20,14 @@ export default defineTool({
       "csv to json browser tool",
     ],
   },
+  content: {
+    overview: "Convert JSON arrays and CSV tables back and forth.",
+    explanation:
+      "The JSON CSV converter helps move structured records between API-friendly JSON and spreadsheet-friendly CSV for inspection, cleanup, and lightweight data exchange.",
+    highlights: [
+      "Convert JSON arrays to CSV",
+      "Convert CSV rows to JSON",
+      "Preview structured data locally",
+    ],
+  },
 });

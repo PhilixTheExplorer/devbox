@@ -20,4 +20,14 @@ export default defineTool({
       "user agent parser in browser",
     ],
   },
+  content: {
+    overview: "Parse user agent strings into browser and device details.",
+    explanation:
+      "The user agent parser extracts browser, operating system, device, and engine hints from UA strings for debugging analytics, compatibility, and request logs.",
+    highlights: [
+      "Parse browser and OS details",
+      "Inspect device and engine hints",
+      "Analyze user agent strings locally",
+    ],
+  },
 });

@@ -20,4 +20,14 @@ export default defineTool({
       "json to typescript without upload",
     ],
   },
+  content: {
+    overview: "Generate TypeScript types from sample JSON.",
+    explanation:
+      "The JSON to TypeScript tool infers type shapes from example payloads so API responses, config files, and fixtures can become typed interfaces faster.",
+    highlights: [
+      "Infer TypeScript from JSON samples",
+      "Create readable type definitions",
+      "Speed up API and fixture typing",
+    ],
+  },
 });

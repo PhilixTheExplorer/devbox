@@ -20,4 +20,14 @@ export default defineTool({
       "json path explorer without upload",
     ],
   },
+  content: {
+    overview: "Query JSON with path expressions and inspect matching output.",
+    explanation:
+      "The JSON path explorer evaluates selectors against sample JSON so nested values, arrays, and API payloads can be tested before code or automation uses them.",
+    highlights: [
+      "Test JSON path expressions",
+      "Inspect matched values instantly",
+      "Debug selectors with local sample data",
+    ],
+  },
 });

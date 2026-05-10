@@ -20,4 +20,15 @@ export default defineTool({
       "identifier case converter in browser",
     ],
   },
+  content: {
+    overview:
+      "Convert identifiers between camel, pascal, snake, kebab, and title case.",
+    explanation:
+      "The case converter reshapes labels, constants, filenames, and code identifiers so pasted text matches the naming convention used by a project or API.",
+    highlights: [
+      "Convert between common developer naming styles",
+      "Handle multi-line text and repeated identifiers",
+      "Prepare names for code, docs, and config",
+    ],
+  },
 });

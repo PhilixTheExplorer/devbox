@@ -20,4 +20,14 @@ export default defineTool({
       "javascript regex tester online",
     ],
   },
+  content: {
+    overview: "Test JavaScript regular expressions against sample text.",
+    explanation:
+      "The regex tester runs patterns against input text so matches, groups, and flags can be checked before a regular expression is copied into code.",
+    highlights: [
+      "Test regex patterns in the browser",
+      "Inspect matches against sample input",
+      "Iterate on JavaScript regular expressions",
+    ],
+  },
 });

@@ -42,6 +42,7 @@ export {
   defineTool,
   TOOL_CATEGORIES,
   type ToolCategory,
+  type ToolContent,
   type ToolMeta,
   type ToolSeo,
 } from "./_define";

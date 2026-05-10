@@ -26,6 +26,12 @@ export type ToolSeo = {
   longTailKeywords: readonly string[];
 };
 
+export type ToolContent = {
+  overview: string;
+  explanation: string;
+  highlights: readonly string[];
+};
+
 export type ToolMeta = {
   id: string;
   name: string;
@@ -33,6 +39,7 @@ export type ToolMeta = {
   description: string;
   tags: readonly string[];
   seo: ToolSeo;
+  content: ToolContent;
   soon?: boolean;
 };
 

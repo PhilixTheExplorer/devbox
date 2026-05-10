@@ -20,4 +20,14 @@ export default defineTool({
       "base64 converter without upload",
     ],
   },
+  content: {
+    overview: "Encode plain text to Base64 or decode Base64 back to text.",
+    explanation:
+      "The Base64 tool is useful for inspecting encoded payloads, quick config values, basic tokens, and transport-safe text while keeping every conversion client-side.",
+    highlights: [
+      "Switch between encode and decode modes",
+      "Move output back into the input for quick round trips",
+      "Convert text locally without network calls",
+    ],
+  },
 });

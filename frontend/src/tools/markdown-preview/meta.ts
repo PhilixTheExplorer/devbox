@@ -20,4 +20,14 @@ export default defineTool({
       "render markdown locally online",
     ],
   },
+  content: {
+    overview: "Render Markdown into a live preview.",
+    explanation:
+      "The Markdown preview tool shows how Markdown content will read after rendering, useful for README edits, release notes, documentation, and quick writing checks.",
+    highlights: [
+      "Preview Markdown formatting",
+      "Check docs before publishing",
+      "Render pasted Markdown locally",
+    ],
+  },
 });

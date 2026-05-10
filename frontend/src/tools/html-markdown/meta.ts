@@ -20,4 +20,14 @@ export default defineTool({
       "html markdown converter online",
     ],
   },
+  content: {
+    overview: "Convert between HTML and Markdown for docs and web content.",
+    explanation:
+      "The HTML Markdown converter helps move content between rendered web markup and Markdown sources, useful for documentation, CMS cleanup, and quick content migration.",
+    highlights: [
+      "Convert HTML into Markdown",
+      "Convert Markdown into HTML",
+      "Keep pasted content private in the browser",
+    ],
+  },
 });

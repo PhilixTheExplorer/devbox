@@ -20,4 +20,14 @@ export default defineTool({
       "browser text comparison tool",
     ],
   },
+  content: {
+    overview: "Compare two text snippets and inspect their differences.",
+    explanation:
+      "The diff viewer highlights additions, removals, and edits between two pieces of text so config changes, generated output, or copied snippets are easier to review.",
+    highlights: [
+      "Compare text side by side",
+      "Highlight additions and removals",
+      "Review changes without uploading files",
+    ],
+  },
 });

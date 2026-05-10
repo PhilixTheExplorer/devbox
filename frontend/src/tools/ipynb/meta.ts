@@ -20,5 +20,16 @@ export default defineTool({
       "python notebook to pdf converter",
     ],
   },
+  content: {
+    overview:
+      "Export Jupyter notebooks to PDF when server conversion is ready.",
+    explanation:
+      "The notebook to PDF tool is registered for future server-side nbconvert support, giving Python notebook users a direct export path from ipynb files.",
+    highlights: [
+      "Planned Jupyter notebook PDF export",
+      "Designed for Python and data workflows",
+      "Marked as coming soon until server support exists",
+    ],
+  },
   soon: true,
 });

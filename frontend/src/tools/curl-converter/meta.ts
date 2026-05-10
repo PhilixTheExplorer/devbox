@@ -20,4 +20,14 @@ export default defineTool({
       "curl command converter without upload",
     ],
   },
+  content: {
+    overview: "Turn curl commands into JavaScript fetch snippets.",
+    explanation:
+      "The curl converter extracts method, headers, body, and URL details from a command and produces fetch code that is easier to paste into scripts or browser tests.",
+    highlights: [
+      "Convert curl requests to fetch",
+      "Preserve headers, methods, and request bodies",
+      "Prototype HTTP calls without uploading commands",
+    ],
+  },
 });

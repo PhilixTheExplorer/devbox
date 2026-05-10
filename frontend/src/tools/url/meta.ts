@@ -20,4 +20,15 @@ export default defineTool({
       "format urls without uploading",
     ],
   },
+  content: {
+    overview:
+      "Parse, encode, decode, and normalize URLs with query parameters.",
+    explanation:
+      "The URL formatter breaks a URL into useful pieces, handles encoded characters, and helps inspect query strings, redirects, callback URLs, and API endpoints.",
+    highlights: [
+      "Encode and decode URL text",
+      "Inspect query parameters clearly",
+      "Normalize messy copied links",
+    ],
+  },
 });

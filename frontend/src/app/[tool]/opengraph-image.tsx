@@ -25,7 +25,7 @@ export default async function Image({ params }: ToolImageProps) {
   const name =
     toolMeta?.seo.primaryKeyword ?? toolMeta?.name ?? "developer tool";
   const description =
-    toolMeta?.description ??
+    toolMeta?.content?.overview ??
     "Fast, private, ad-free developer tools that run in your browser.";
   const category = toolMeta?.category ?? "tool";
   const siteLabel = `[${SITE_NAME}]`;

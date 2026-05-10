@@ -20,4 +20,14 @@ export default defineTool({
       "pretty print sql online",
     ],
   },
+  content: {
+    overview: "Make SQL queries easier to read, review, and share.",
+    explanation:
+      "The SQL formatter spaces and indents queries so joins, clauses, and nested statements are easier to scan during debugging, documentation, or code review.",
+    highlights: [
+      "Format common SQL query structure",
+      "Improve readability for copied database queries",
+      "Keep query text local to the browser",
+    ],
+  },
 });

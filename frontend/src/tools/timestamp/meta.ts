@@ -20,4 +20,14 @@ export default defineTool({
       "timestamp converter in browser",
     ],
   },
+  content: {
+    overview: "Convert Unix timestamps, epoch values, and readable dates.",
+    explanation:
+      "The Unix timestamp converter turns epoch seconds or milliseconds into readable dates and converts dates back into timestamp values for logs, APIs, and debugging.",
+    highlights: [
+      "Convert timestamp values to dates",
+      "Convert dates back to epoch time",
+      "Inspect time values without leaving the page",
+    ],
+  },
 });

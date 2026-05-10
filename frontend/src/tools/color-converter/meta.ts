@@ -20,4 +20,14 @@ export default defineTool({
       "css color format converter",
     ],
   },
+  content: {
+    overview: "Convert CSS colors between hex, RGB, HSL, and related formats.",
+    explanation:
+      "The color converter helps translate design values into the format a stylesheet, design token, or component API expects while preserving the same visible color.",
+    highlights: [
+      "Convert common CSS color formats",
+      "Inspect related color values quickly",
+      "Copy browser-ready color output",
+    ],
+  },
 });

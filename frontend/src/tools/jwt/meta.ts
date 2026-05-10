@@ -20,4 +20,14 @@ export default defineTool({
       "jwt decoder without tracking",
     ],
   },
+  content: {
+    overview: "Decode JWT headers and payloads in the browser.",
+    explanation:
+      "The JWT decoder displays token header and payload data so claims, expiry values, issuers, and scopes can be inspected without sending the token to a server.",
+    highlights: [
+      "Decode JWT header and payload sections",
+      "Inspect token claims locally",
+      "Avoid uploading sensitive tokens",
+    ],
+  },
 });

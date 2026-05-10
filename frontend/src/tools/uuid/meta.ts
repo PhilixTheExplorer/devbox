@@ -21,4 +21,14 @@ export default defineTool({
       "local guid generator online",
     ],
   },
+  content: {
+    overview: "Generate random UUID v4 and GUID values locally.",
+    explanation:
+      "The UUID generator creates cryptographically random identifiers for tests, fixtures, database records, mock APIs, and any workflow that needs a unique id quickly.",
+    highlights: [
+      "Generate UUID v4 values locally",
+      "Create batches of unique identifiers",
+      "Copy random GUIDs for development use",
+    ],
+  },
 });

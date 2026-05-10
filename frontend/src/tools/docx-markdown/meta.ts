@@ -20,4 +20,14 @@ export default defineTool({
       "extract markdown from docx online",
     ],
   },
+  content: {
+    overview: "Convert Word document text into Markdown.",
+    explanation:
+      "The DOCX to Markdown converter turns document content into plain Markdown for README files, notes, documentation systems, and other text-first workflows.",
+    highlights: [
+      "Extract Markdown from DOCX files",
+      "Preserve readable document structure",
+      "Convert documents without an account",
+    ],
+  },
 });

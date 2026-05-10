@@ -75,7 +75,9 @@ function HomeCard({ tool }: HomeCardProps) {
           </span>
         )}
       </div>
-      <div className="text-ui-xs text-muted">{tool.description}</div>
+      <div className="text-ui-xs text-muted">
+        {tool.content?.overview ?? tool.description}
+      </div>
     </>
   );
 
