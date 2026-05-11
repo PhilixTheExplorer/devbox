@@ -28,7 +28,8 @@
     "remark-gfm": "^4.0.1",
     "turndown": "^7.2.4",
     "turndown-plugin-gfm": "^1.0.2",
-    "yaml": "^2.8.4"
+    "yaml": "^2.8.4",
+    "zustand": "^5.0.13"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",

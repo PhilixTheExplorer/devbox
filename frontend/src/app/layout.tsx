@@ -11,7 +11,7 @@ import {
   SITE_TITLE,
 } from "@/config/site";
 import "./globals.css";
-import { DevboxShellProvider } from "@/components/shell/contexts/shell-provider";
+import { DevboxShellEffects } from "@/components/shell/state/shell-effects";
 import { DevboxShell } from "@/components/shell/views/app-shell";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -102,9 +102,8 @@ export default function RootLayout({
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
-        <DevboxShellProvider>
-          <DevboxShell>{children}</DevboxShell>
-        </DevboxShellProvider>
+        <DevboxShellEffects />
+        <DevboxShell>{children}</DevboxShell>
       </body>
     </html>
   );

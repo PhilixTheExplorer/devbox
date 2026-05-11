@@ -2,15 +2,19 @@
 
 import Link from "next/link";
 import { TuneIcon } from "@/components/icons";
-import { useShellSidebar } from "@/components/shell/contexts/sidebar-context";
-import { useShellThemeContext } from "@/components/shell/contexts/theme-context";
-import { useShellTweaks } from "@/components/shell/contexts/tweaks-context";
+import { useShellStore } from "@/components/shell/state/shell-store";
 import { SupportLinks } from "@/components/support-link";
 
 export function DevboxTopbar() {
-  const { mobileSidebarOpen, toggleMobileSidebar } = useShellSidebar();
-  const { theme, toggleTheme, mounted } = useShellThemeContext();
-  const { tweaks, toggleTweaks } = useShellTweaks();
+  const mobileSidebarOpen = useShellStore((state) => state.mobileSidebarOpen);
+  const toggleMobileSidebar = useShellStore(
+    (state) => state.toggleMobileSidebar,
+  );
+  const theme = useShellStore((state) => state.theme);
+  const toggleTheme = useShellStore((state) => state.toggleTheme);
+  const mounted = useShellStore((state) => state.mounted);
+  const tweaks = useShellStore((state) => state.tweaks);
+  const toggleTweaks = useShellStore((state) => state.toggleTweaks);
 
   const menuLabel = mobileSidebarOpen ? "close navigation" : "open navigation";
   const themeLabel =

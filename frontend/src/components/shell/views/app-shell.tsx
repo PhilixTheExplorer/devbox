@@ -1,7 +1,6 @@
 "use client";
 
-import { useShellSidebar } from "@/components/shell/contexts/sidebar-context";
-import { useShellTweaks } from "@/components/shell/contexts/tweaks-context";
+import { useShellStore } from "@/components/shell/state/shell-store";
 import { DevboxSidebar } from "./sidebar";
 import { DevboxStatusBar } from "./status-bar";
 import { DevboxTopbar } from "./topbar";
@@ -12,8 +11,9 @@ type DevboxShellProps = {
 };
 
 export function DevboxShell({ children }: DevboxShellProps) {
-  const { mobileSidebarOpen, closeMobileSidebar } = useShellSidebar();
-  const { tweaks } = useShellTweaks();
+  const mobileSidebarOpen = useShellStore((state) => state.mobileSidebarOpen);
+  const closeMobileSidebar = useShellStore((state) => state.closeMobileSidebar);
+  const tweaks = useShellStore((state) => state.tweaks);
 
   return (
     <div className="flex h-screen overflow-hidden">

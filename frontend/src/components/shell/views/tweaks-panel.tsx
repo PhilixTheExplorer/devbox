@@ -1,15 +1,23 @@
 "use client";
 
 import { PaletteIcon, ThemePanelIcon, TuneIcon } from "@/components/icons";
-import { useShellThemeContext } from "@/components/shell/contexts/theme-context";
-import { useShellTweaks } from "@/components/shell/contexts/tweaks-context";
+import { postToSameOriginParent } from "@/components/shell/state/shell-messages";
+import { useShellStore } from "@/components/shell/state/shell-store";
 import { Btn, SectionLabel } from "@/components/ui";
 import { ACCENT_PRESETS } from "@/config/theme-presets";
 
 export function TweaksPanel() {
-  const { theme, setTheme, accentIdx, setAccentIdx, mounted } =
-    useShellThemeContext();
-  const { closeTweaks } = useShellTweaks();
+  const theme = useShellStore((state) => state.theme);
+  const setTheme = useShellStore((state) => state.setTheme);
+  const accentIdx = useShellStore((state) => state.accentIdx);
+  const setAccentIdx = useShellStore((state) => state.setAccentIdx);
+  const mounted = useShellStore((state) => state.mounted);
+  const closeTweaks = useShellStore((state) => state.closeTweaks);
+
+  const closePanel = () => {
+    closeTweaks();
+    postToSameOriginParent({ type: "__edit_mode_dismissed" });
+  };
 
   // Return null or placeholder before mounting to avoid hydration mismatch
   if (!mounted) return null;
@@ -23,7 +31,7 @@ export function TweaksPanel() {
         </span>
         <button
           type="button"
-          onClick={closeTweaks}
+          onClick={closePanel}
           className="bg-transparent border-none cursor-pointer text-muted text-lg leading-none font-inherit"
         >
           &times;

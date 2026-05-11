@@ -1,7 +1,8 @@
 "use client";
 
 import { useSelectedLayoutSegment } from "next/navigation";
-import { useShellSidebar } from "@/components/shell/contexts/sidebar-context";
+import { useCallback, useMemo } from "react";
+import { useShellStore } from "@/components/shell/state/shell-store";
 import { TOOL_CATEGORIES, TOOLS } from "@/tools";
 
 const SIDEBAR_CATEGORIES = TOOL_CATEGORIES.map((category) => ({
@@ -12,26 +13,52 @@ const SIDEBAR_CATEGORIES = TOOL_CATEGORIES.map((category) => ({
 
 export function useSidebarModel() {
   const segment = useSelectedLayoutSegment();
-  const sidebar = useShellSidebar();
+  const mobileSidebarOpen = useShellStore((state) => state.mobileSidebarOpen);
+  const closeMobileSidebar = useShellStore((state) => state.closeMobileSidebar);
+  const search = useShellStore((state) => state.search);
+  const setSearch = useShellStore((state) => state.setSearch);
+  const clearSearch = useShellStore((state) => state.clearSearch);
+  const setSearchInput = useShellStore((state) => state.setSearchInput);
+
+  const filteredTools = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    if (!query) {
+      return [];
+    }
+
+    return TOOLS.filter(
+      (tool) =>
+        tool.tags.some((tag) => tag.toLowerCase().includes(query)) ||
+        tool.name.toLowerCase().includes(query) ||
+        tool.description.toLowerCase().includes(query),
+    );
+  }, [search]);
 
   const finishNavigation = () => {
-    sidebar.clearSearch();
-    sidebar.closeMobileSidebar();
+    clearSearch();
+    closeMobileSidebar();
   };
+
+  const searchRef = useCallback(
+    (input: HTMLInputElement | null) => {
+      setSearchInput(input);
+    },
+    [setSearchInput],
+  );
 
   return {
     activeAbout: segment === "about",
     activeToolId: segment && segment !== "about" ? segment : null,
-    mobileOpen: sidebar.mobileSidebarOpen,
+    mobileOpen: mobileSidebarOpen,
     search: {
-      value: sidebar.search,
-      ref: sidebar.searchRef,
-      results: sidebar.filteredTools,
-      setValue: sidebar.setSearch,
+      value: search,
+      ref: searchRef,
+      results: filteredTools,
+      setValue: setSearch,
     },
     categories: SIDEBAR_CATEGORIES,
     actions: {
-      closeMobile: sidebar.closeMobileSidebar,
+      closeMobile: closeMobileSidebar,
       finishNavigation,
     },
   };
