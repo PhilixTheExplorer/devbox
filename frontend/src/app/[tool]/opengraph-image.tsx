@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { SITE_NAME } from "@/config/site";
+import { SITE_LOGO_TEXT, SITE_NAME } from "@/config/site";
 import { getToolById, TOOLS } from "@/tools";
 
 export const alt = `${SITE_NAME} developer tool`;
@@ -28,7 +28,7 @@ export default async function Image({ params }: ToolImageProps) {
     toolMeta?.content?.overview ??
     "Fast, private, ad-free developer tools that run in your browser.";
   const category = toolMeta?.category ?? "tool";
-  const siteLabel = `[${SITE_NAME}]`;
+  const siteLabel = SITE_LOGO_TEXT;
   const fullDescription = `${description} Free, ad-free, and private in your browser.`;
 
   return new ImageResponse(

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { SupportLinks } from "@/components/support-link";
-import { OSS_LINKS, SITE_NAME } from "@/config/site";
+import { OSS_LINKS, SITE_NAME, SITE_URL } from "@/config/site";
 
-const title = "About devbox";
+const title = "About thedevbox";
 const description =
-  "Learn about devbox and why these developer utilities are ad-free, account-free, tracking-free, and privacy-first.";
+  "Learn about thedevbox and why these developer utilities are ad-free, account-free, tracking-free, and privacy-first.";
 
 export const metadata: Metadata = {
   title,
@@ -39,9 +39,20 @@ export default function AboutPage() {
         <hr className="border-border mb-7" />
         <section className="flex flex-col gap-4 leading-loose text-muted2">
           <p>
-            devbox is a collection of tools built by developers who got tired of
-            sites that require login to format json, questionable online
-            converters, and heavyweight apps for tiny everyday tasks.
+            thedevbox is the official home of{" "}
+            <span className="text-text">[devbox]</span>, a collection of tools
+            built by developers who got tired of sites that require login to
+            format json, questionable online converters, and heavyweight apps
+            for tiny everyday tasks.
+          </p>
+          <p>
+            official site:{" "}
+            <a
+              href={SITE_URL}
+              className="text-accent no-underline hover:underline"
+            >
+              {SITE_URL.replace("https://", "")}
+            </a>
           </p>
           <p>
             every tool runs{" "}

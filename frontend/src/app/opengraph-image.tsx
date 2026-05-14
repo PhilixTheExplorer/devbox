@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { SITE_DESCRIPTION, SITE_NAME } from "@/config/site";
+import { SITE_DESCRIPTION, SITE_DISPLAY_NAME, SITE_NAME } from "@/config/site";
 
 export const alt = `${SITE_NAME} developer tools`;
 export const size = {
@@ -37,7 +37,7 @@ export default function Image() {
       <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
         <div style={{ display: "flex", fontSize: 104, fontWeight: 800 }}>
           <span style={{ color: "#52a878" }}>[</span>
-          <span>{SITE_NAME}</span>
+          <span>{SITE_DISPLAY_NAME}</span>
           <span style={{ color: "#52a878" }}>]</span>
         </div>
         <div
